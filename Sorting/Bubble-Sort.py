@@ -7,7 +7,7 @@ def BubbleSort(arr):
                 arr[j], arr[j+1] = arr[j+1], arr[j]   #swapping
     
 
-#####Optimized Approach#######
+#####Optimized Approach######
 def BubbleSort1(arr):
     n = len(arr)
     for i in range(n-1):
