@@ -39,7 +39,7 @@ def BinarySearch1(arr,low,high,value):
     #if not found
     return -1
 
-array = list(map(int,input("Enter your array (as space separated integer) : ").split()))
+array = list(map(int,input("Enter your array (as space separated integers) : ").split()))
 value = int(input("Enter the value to be searched : "))
 
 result = BinarySearch1(array,0,len(array)-1,value)
