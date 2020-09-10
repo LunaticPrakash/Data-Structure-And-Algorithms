@@ -15,7 +15,7 @@ def LinearSearch1(arr,key):
     if flag == 0:
         print("Not Found")
 
-array = list(map(int,input("Enter your array (as space separated integer) : ").split()))
+array = list(map(int,input("Enter your array (as space separated integers) : ").split()))
 value = int(input("Enter the value to be searched : "))
 
 LinearSearch(array,value)

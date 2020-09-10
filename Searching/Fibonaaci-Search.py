@@ -36,7 +36,7 @@ def FibonacciSearch(arr,value):
     return -1
 
 
-array = list(map(int,input("Enter your array (as space separated integer) : ").split()))
+array = list(map(int,input("Enter your array (as space separated integers) : ").split()))
 value = int(input("Enter the value to be searched : "))
 
 result = FibonacciSearch(array,value)
