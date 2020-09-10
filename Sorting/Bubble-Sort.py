@@ -1,7 +1,7 @@
 ######Simple Approach########
 def BubbleSort(arr):
     n = len(arr)
-    for i in range(n-1):   #no need to check for last element as it will be already in correct place just after first iteration
+    for i in range(n-1):  #no need to check for last element as it will be already in correct place just after first iteration
         for j in range(n-1-i):  #ith element will be in correct position so, do not compare them
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]   #swapping
