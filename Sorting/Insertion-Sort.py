@@ -5,7 +5,7 @@ def InsertionSort(arr):
 
         # Moving elements of arr[0...i-1], which are greater than key
         # to one position ahead of their current position so that
-        #key can be inserted
+        # key can be inserted
         while(j >=0 and arr[j]>key):
             arr[j+1] = arr[j]
             j = j-1
