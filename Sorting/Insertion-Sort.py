@@ -8,7 +8,7 @@ def InsertionSort(arr):
         while(j >=0 and arr[j]>key):
             arr[j+1] = arr[j]
             j = j-1
-        #placing key at it's correct position in sorted array
+        #inserting key at it's correct position in sorted
         arr[j+1] = key
 
 #Taking the input
