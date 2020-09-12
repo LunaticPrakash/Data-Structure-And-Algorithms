@@ -42,8 +42,7 @@ def mergeSort(A):
             A[k] = C[j]
             k = k + 1
             j = j + 1
-    #returning final merged sorted array
-    return A
+
 
 #Taking the input
 array = list(map(int,input("Enter your array (as space separated integers) : ").split()))
