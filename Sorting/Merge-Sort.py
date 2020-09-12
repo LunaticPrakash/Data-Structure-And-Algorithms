@@ -44,6 +44,8 @@ def mergeSort(A):
             j = j + 1
 
 
+#driver (or main) code
+
 #Taking the input
 array = list(map(int,input("Enter your array (as space separated integers) : ").split()))
 
