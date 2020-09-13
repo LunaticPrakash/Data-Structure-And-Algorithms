@@ -5,7 +5,7 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
 ## Searching :-
 - Linear Search
 - Binary Search (Both Iterative and Recursive Approach)
-- Fibonaaci Search
+- Fibonacci Search
 - Interpolation Search(Both Iterative and Recursive Approach);
 
 ## Sorting :- 
