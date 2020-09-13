@@ -1,4 +1,8 @@
 ######Iterative Approach###########
+
+#low = first index = 0
+#high = last index = len(arr) -1
+#value = element to be searched
 def interpolationSearch(arr,low,high,value):
 
     while low<=high:
