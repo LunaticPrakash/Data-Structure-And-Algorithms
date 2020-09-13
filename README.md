@@ -13,3 +13,4 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
 - Selection Sort
 - Insertion Sort
 - Merge Sort
+- Counting Sort (For positive number only)
