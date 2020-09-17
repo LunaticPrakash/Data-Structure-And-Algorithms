@@ -14,6 +14,7 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
 - Insertion Sort
 - Merge Sort
 - Counting Sort (For positive number only)
+- Bucket Sort
 
 ## Array :-
 - Dynamic Array Implementation in Python
