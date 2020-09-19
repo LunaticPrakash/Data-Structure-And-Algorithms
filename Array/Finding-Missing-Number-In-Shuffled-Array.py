@@ -2,7 +2,8 @@ def findMissing(arr1,arr2):
     miss_num = 0
 
     # 4 XOR 8 = 12 and 12 XOR 8 will give us 4 again 
-    # so, we will use this concept
+    # so, we will use this concept as same numbers
+    # will cancel out and missing one will be left.
     for i in range(len(arr1)):
         miss_num = miss_num ^ arr1[i]
         print(miss_num)
