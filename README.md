@@ -18,3 +18,7 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
 
 ## Array :-
 - Dynamic Array Implementation in Python
+- Array Left Rotation By d
+- Checking Anagram
+- Array Pair Sum Problem
+- Finding Missing number in Shuffled Array
