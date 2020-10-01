@@ -22,3 +22,9 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
 - Checking Anagram
 - Array Pair Sum Problem
 - Finding Missing number in Shuffled Array
+- Finding Max-HourGlass-Sum
+- Move-Zeros-To-End
+- Rearrange-Array-arr[i] = i
+- Reverse-String
+- Reverse-Individual-Words
+- Search Element in Sorted and Rotated Array
