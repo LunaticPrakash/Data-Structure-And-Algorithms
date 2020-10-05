@@ -1,3 +1,4 @@
+import math
 def LeftRotationOneTime(arr,d):
 
     if len(arr)>1:
@@ -7,15 +8,40 @@ def LeftRotationOneTime(arr,d):
 
         arr[i] = temp
     
-
-
-def leftRotateby(arr, d): 
+def leftRotatebyd(arr, d): 
     for i in range(d): 
         LeftRotationOneTime(arr, len(arr)) 
+
+#######  More efficient algorithm ###########        
+
+def rotateLeft(arr,d):
+
+    n = len(arr)
+    Gcd = math.gcd(n,d)
+    for i in range(Gcd):
+
+        temp = arr[i]
+        j = i
+        while 1:
+            k = j + d
+            if k>=n:
+                k = k-n
+            if k==i:
+                break
+            arr[j] = arr[k]
+            j = k
+            print(arr)
+        arr[j] = temp
+
+    return arr
+
+
+
+
 
 
 array = list(map(int,input("Enter your array (as space separated integers) : ").split()))
 d = int(input("How many times you want to rotate? "))
 
-leftRotateby(array,d)
-print(array)
+a = rotateLeft(array,d)
+print(a)
