@@ -6,12 +6,10 @@ def findMissing(arr1,arr2):
     # will cancel out and missing one will be left.
     for i in range(len(arr1)):
         miss_num = miss_num ^ arr1[i]
-        print(miss_num)
 
     for i in range(len(arr2)):
         miss_num = miss_num ^ arr2[i]
-        print(miss_num)
-
+        
     return miss_num
 
 #Taking the input
