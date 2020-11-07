@@ -26,11 +26,10 @@ int main(){
     return 0;
 }
 
-//Body of the declared function
+//Iterative approach for Linear-Search
 void Linear_Search(int arr[], int size, int key){
 
     int flag = 0;
-
     for(int i=0; i<size; ++i)
         if (arr[i] == key){
             std::cout<< key << " found at index " << i << std::endl;
@@ -39,4 +38,21 @@ void Linear_Search(int arr[], int size, int key){
 
     if(flag == 0)
         std::cout << key << " not found !" << std::endl;    
+}
+
+
+//Recursive approach for Linear-Search
+int rec_Linear_Search(int arr[], int first, int last, int key){
+
+    if(first < last)
+        return -1;
+    
+    else if(arr[first] == key)
+        return first;
+
+    else if(arr[last] == key)
+        return last;
+     
+    rec_Linear_Search(arr,first + 1, last-1, key);
+
 }
