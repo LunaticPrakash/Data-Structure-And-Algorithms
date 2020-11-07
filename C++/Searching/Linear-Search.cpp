@@ -4,6 +4,7 @@
 //Declaring function defination, to let 
 //compiler know that this function do exists
 void Linear_Search(int [], int , int );
+int rec_Linear_Search(int arr[], int first, int last, int key);
 
 int main(){
 
@@ -44,7 +45,7 @@ void Linear_Search(int arr[], int size, int key){
 //Recursive approach for Linear-Search
 int rec_Linear_Search(int arr[], int first, int last, int key){
 
-    if(first < last)
+    if(first > last)
         return -1;
     
     else if(arr[first] == key)
@@ -53,6 +54,6 @@ int rec_Linear_Search(int arr[], int first, int last, int key){
     else if(arr[last] == key)
         return last;
      
-    rec_Linear_Search(arr,first + 1, last-1, key);
+    return rec_Linear_Search(arr,first + 1, last-1, key);
 
 }
