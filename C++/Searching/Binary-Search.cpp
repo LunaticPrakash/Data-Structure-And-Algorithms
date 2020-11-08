@@ -35,9 +35,9 @@ int BinarySearch(int arr[], int size, int key){
 
     int left = 0;
     int right = size;
-    int mid = (left + right) / 2;
     while (left < right){
 
+        int mid = (left + right) / 2;
         if(arr[mid] == key)
             return key;
 

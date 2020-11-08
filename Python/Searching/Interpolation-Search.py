@@ -5,7 +5,7 @@
 #value = element to be searched
 def interpolationSearch(arr,low,high,value):
 
-    while low<=high:
+    while (low<=high and value >= arr[low] and value <= arr[high]) :
 
         # Finding the optimal position to divide (or split) the array
         # The idea is to find the position closer to searched value
@@ -26,7 +26,7 @@ def interpolationSearch(arr,low,high,value):
 ######Recursive Approach##########
 def interpolationSearch1(arr,low,high,value):
 
-    if low<=high:
+    if (low<=high and value >= arr[low] and value <= arr[high]):
 
         pos = low + (high-low) // (arr[high]-arr[low]) * (value-arr[low])
 
