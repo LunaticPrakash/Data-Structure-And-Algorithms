@@ -33,14 +33,8 @@ int Interpolation_Search(int arr[], int low, int high, int key){
     while(low<=high && key >= arr[low] && key <= arr[high]){
 
         int pos = low + (int)((high-low)/(arr[high]-arr[low])) * (key-arr[low]);
-        // int pos = low + (((double)(high - low) / (arr[high] - arr[low])) * (key - arr[low])); 
-  
-        std::cout<<"pos = " <<pos <<std::endl;
-        std::cout<<"high - low = " <<high - low <<std::endl;
-        std::cout<<"arr[high] - arr[low] = " <<arr[high] - arr[low] <<std::endl;
 
         std::cin.get();
-
 
         if(arr[pos] == key)
             return pos;

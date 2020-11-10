@@ -27,6 +27,7 @@ def mergeSort(A):
             else:
                 A[k] = B[i]
                 i = i + 1
+           
             k = k + 1
         
         # if any element is remaining in array B then insert
