@@ -16,8 +16,8 @@ def reverseRecursive(arr,start,end):
     if start < end:
         arr[start], arr[end] = arr[end], arr[start]
         reverseRecursive(arr, start + 1, end -1)
-    return "".join(array)
+    return "".join(arr)
 
 array = input("Enter string or array : ")
 array = list(array)
-print("Reverse : ",reverseIterative(array))
+print("Reverse : ",reverseRecursive(array,0,len(array)-1))
