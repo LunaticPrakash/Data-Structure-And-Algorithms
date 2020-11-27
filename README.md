@@ -28,3 +28,15 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
 - Reverse-String
 - Reverse-Individual-Words
 - Search Element in Sorted and Rotated Array
+
+## Linked List :- 
+  # Singly-Linked-List ->
+    - Insertion
+    - Insert After a value
+    - Delete by value
+    - Delete by index
+    - Finding Length
+    - Deleting Alternate Nodes
+    - Displaying all elements
+    - Linear Search
+    
