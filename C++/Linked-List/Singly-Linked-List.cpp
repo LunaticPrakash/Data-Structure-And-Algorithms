@@ -423,8 +423,7 @@ int main(){
                 break;
 
             case 6: 
-                std::cout << "1. Bubble Sort\n" << "2. Selection Sort\n" 
-                            <<"3. Insertion Sort\n";
+                std::cout << "1. Bubble Sort\n" << "2. Selection Sort\n";
                 std::cin >> c;
 
                 if(c==1){
@@ -437,8 +436,6 @@ int main(){
                     std::cout << "\nSorted Array is : ";
                     list1.display(list1.head);
                 }
-
-
 
             case 7: 
                 exit(0);
