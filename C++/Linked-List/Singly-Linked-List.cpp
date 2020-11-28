@@ -332,6 +332,62 @@ class LinkedList{
             return head;
         }
 
+        // This function displays the frequency of every elements
+        void FreqofElements(Node* head){
+            
+            Node* ptr1 = head;
+            while(ptr1 != NULL){
+                int count = 1;
+                Node* ptr2 = ptr1->next;
+                while(ptr2!=NULL){
+                    if(ptr1->data == ptr2->data)
+                        count++; 
+                    ptr2 = ptr2->next;                   
+                }
+                std::cout<< "\n" <<ptr1->data << " founds " << count << " times\n";
+                while(ptr1->next != NULL && ptr1->next->data == ptr1->data)
+                    ptr1 = ptr1->next;
+                ptr1 = ptr1->next;
+            }
+        }
+
+        // This function checks if there is loop in Linked List
+        bool checkLoop(Node* head){
+
+            /*******Floyd’s Cycle-Finding Algorithm******/
+            /*Traverse linked list using two pointers.Move one pointer
+            slow by one and another pointerfast by two. If they become
+            equal then loop exists*/
+
+            Node* slow = head;
+            Node* fast = head;
+
+            while(slow!=NULL && fast!=NULL && fast->next!=NULL){
+                slow = slow->next;
+                fast = fast->next->next;
+                if(slow == fast)            
+                    return true;
+            }
+            return false;
+        }
+
+        // This function reverses the Linked List
+        Node* reverse(Node* head){
+            Node* pre = NULL;
+            Node* curr = head;
+            Node* next = curr->next;
+
+            while(curr != NULL){
+                curr->next = pre;
+                pre = curr;
+                curr = next;
+
+                if(next!=NULL)
+                    next = next->next;
+            }
+            return pre;
+        }
+
         
 };
 
@@ -343,11 +399,11 @@ int main(){
     LinkedList list1;
     // Node* head = NULL;
 
-    while (choice != 6){
+    while (choice != 8){
 
     std::cout << "\n1. Insert" << "\n2. Delete" << "\n3. Display" 
                 <<"\n4. Length of Linked List" <<"\n5. Searching" <<
-                "\n6. Sorting" << "\n7. Exit\n";
+                "\n6. Sorting" << "\n7. Extra Functions" <<"\n8. Exit\n";
 
     std::cout << "Enter your choice :  ";
     std::cin >> choice;
@@ -437,7 +493,32 @@ int main(){
                     list1.display(list1.head);
                 }
 
-            case 7: 
+            case 7:
+                std::cout << "1. Frequency of Elements\n" << "2. Reverse Linked List\n"
+                            <<"3. Detect Loop\n";
+                std::cin >> c;
+
+                if(c==1)
+                    list1.FreqofElements(list1.head);
+
+                else if(c==2){
+                    list1.head = list1.reverse(list1.head);
+                    std::cout<< "\nReversed Linked List :  ";
+                    list1.display(list1.head);
+                }
+                                
+                else if(c=3){
+                    list1.head->next->next->next->next = list1.head;
+                    bool loop = list1.checkLoop(list1.head);
+                    if(loop)
+                        std::cout<<"\nLoop exists\n";
+                    else
+                        std::cout<<"\nLoop don't exists\n";
+                }
+
+                break;
+
+            case 8: 
                 exit(0);
             
             default :
