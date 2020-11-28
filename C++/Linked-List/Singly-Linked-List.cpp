@@ -240,6 +240,53 @@ class LinkedList{
             // return LinearSearch(temp->next,key);
         }
 
+        // This is helper function for BinarySearch()
+        // It returns middle node of Linked List
+        Node* middle(Node* start,Node* last){
+
+            if(start == NULL)
+                return NULL;
+
+            Node* slow = start;
+            Node* fast = start->next;
+
+            while(fast != last){
+                fast = fast->next;
+
+                if(fast!= last){
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+            }
+            std::cout<<"Middle data = " << slow->data<< std::endl;
+            std::cin.get();
+            return slow; 
+        }
+
+        // This function searches the key given by user by binary approach
+        int BinarySearch(Node* head, int key,Node* last){
+
+            Node* start = head;
+
+            if(last == NULL || start != last){                
+                Node* mid = middle(start,last);
+
+                if(mid == NULL)
+                    return -1;
+
+                else if(mid->data == key)
+                    return 1;
+
+                else if(mid->data > key)
+                    return BinarySearch(start,key, mid);
+
+                else
+                    return BinarySearch(mid->next,key,last);
+
+            }
+            return -1;
+        }
+
         
 };
 
@@ -317,7 +364,15 @@ int main(){
                         std::cout<< key << " found!\n\n";
                     else
                          std::cout<< key << " not found!\n";                       
-                }                      
+                }
+
+                else if(c==2){
+                    int result = list1.BinarySearch(list1.head,key,NULL);
+                    if(result == 1)
+                        std::cout<< key << " found!\n\n";
+                    else
+                         std::cout<< key << " not found!\n"  ;  
+                }                  
                 break;
 
             case 6: 
