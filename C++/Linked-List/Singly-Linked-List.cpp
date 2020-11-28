@@ -508,7 +508,6 @@ int main(){
                 }
                                 
                 else if(c=3){
-                    list1.head->next->next->next->next = list1.head;
                     bool loop = list1.checkLoop(list1.head);
                     if(loop)
                         std::cout<<"\nLoop exists\n";
