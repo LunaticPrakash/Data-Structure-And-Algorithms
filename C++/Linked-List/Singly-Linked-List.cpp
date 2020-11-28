@@ -287,6 +287,51 @@ class LinkedList{
             return -1;
         }
 
+        // This function sorts the linked list based on data
+        Node* BubbleSort(Node* head) {
+            
+            Node* ptr1 = head;
+            int temp,swap;
+
+            while(ptr1 != NULL){
+                Node* ptr2 = head;
+                swap=0; 
+                while(ptr2->next!=NULL)
+                {
+                    if(ptr2->data > ptr2->next->data){
+                        //swapping
+                        temp = ptr2->next->data;
+                        ptr2->next->data = ptr2->data;
+                        ptr2->data = temp;
+                        swap = 1;  //swap takes place
+                    }
+                    ptr2 = ptr2->next;
+                }
+                if(swap == 0)  //if no swap happens break the loop
+                    break;
+                ptr1 = ptr1->next;
+            }
+            return head;
+        }
+
+        // This function sorts the linked list based on data
+        Node* SelectionSort(Node* head){
+
+            int temp;
+            for(Node* ptr1=head; ptr1->next!= NULL; ptr1=ptr1->next){
+                Node* min_node = ptr1;
+                for(Node* ptr2= ptr1->next; ptr2 != NULL; ptr2 = ptr2->next){
+                    if(min_node->data > ptr2->data)
+                        min_node = ptr2;
+                }
+                //swapping
+                temp = min_node->data;
+                min_node->data = ptr1->data;
+                ptr1->data = temp;
+            }
+            return head;
+        }
+
         
 };
 
@@ -301,7 +346,9 @@ int main(){
     while (choice != 6){
 
     std::cout << "\n1. Insert" << "\n2. Delete" << "\n3. Display" 
-                <<"\n4. Length of Linked List" <<"\n5. Searching" <<"\n6. Exit\n";
+                <<"\n4. Length of Linked List" <<"\n5. Searching" <<
+                "\n6. Sorting" << "\n7. Exit\n";
+
     std::cout << "Enter your choice :  ";
     std::cin >> choice;
 
@@ -376,6 +423,24 @@ int main(){
                 break;
 
             case 6: 
+                std::cout << "1. Bubble Sort\n" << "2. Selection Sort\n" 
+                            <<"3. Insertion Sort\n";
+                std::cin >> c;
+
+                if(c==1){
+                    list1.head = list1.BubbleSort(list1.head);
+                    std::cout << "\nSorted Array is : ";
+                    list1.display(list1.head);
+                }
+                else if(c==2){
+                    list1.head = list1.SelectionSort(list1.head);
+                    std::cout << "\nSorted Array is : ";
+                    list1.display(list1.head);
+                }
+
+
+
+            case 7: 
                 exit(0);
             
             default :
