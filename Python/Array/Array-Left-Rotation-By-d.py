@@ -30,7 +30,6 @@ def rotateLeft(arr,d):
                 break
             arr[j] = arr[k]
             j = k
-            print(arr)
         arr[j] = temp
 
     return arr
