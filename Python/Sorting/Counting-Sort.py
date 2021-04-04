@@ -8,8 +8,8 @@ def countingSort(arr):
     # count_arr will store frequency and then cummulative frequency 
     # of each element in array
     #output_arr will contain our final sorted array
-    count_arr = [0 for i in range(max_element+1)]
-    output_arr = [0 for i in range(len(arr))]
+    count_arr = [0]*(max_element+1)
+    output_arr = [0]*len(arr)
 
 
     #storing frequency/count of each element of inputted array into count_arr
