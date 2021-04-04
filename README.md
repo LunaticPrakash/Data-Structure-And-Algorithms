@@ -44,6 +44,6 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
   - Bubble Sort (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC291">C++</a>)
   - Selection Sort (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC318">C++</a>)
   - Frequency of Elements (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC336">C++</a>)
-  - Reverse Linked List (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC355">C++</a>)
-  - Detect If Loop Exists (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC375">C++</a>)
+  - Reverse Linked List (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC375">C++</a>)
+  - Detect If Loop Exists (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC355">C++</a>)
     
