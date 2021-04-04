@@ -20,7 +20,7 @@ def hourglasssum(arr):
 
             #for printing each hourglass
             print(arr[i][j]," ",arr[i][j+1]," ",arr[i][j+2])
-            print("   ",arr[i+1][j+1], "     = ", sum)
+            print("   ",arr[i+1][j+1], "     = ", curr_sum)
             print(arr[i+2][j], " ", arr[i+2][j+1], " ",arr[i+2][j+2])
             print("\n")
 
