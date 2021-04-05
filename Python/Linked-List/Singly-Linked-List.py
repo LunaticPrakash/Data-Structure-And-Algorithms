@@ -35,7 +35,26 @@ class LinkedList:
             new_node.next = temp.next
             temp.next = new_node
         return head
-    
+   
+    # This function delete that node whose value is given by user
+    def deleteByValue(self,head,data):
+        if head == None:
+            print("\nLinked List is Empty !\n")
+        else:
+            if head.data == data:
+                del_node = head
+                head = head.next            
+            else:
+                temp = head
+                while temp.next.data != data:
+                    temp = temp.next
+                del_node = temp.next
+                temp.next = del_node.next
+
+            print("\n",del_node.data,"deleted successfully !\n")
+            del del_node
+        return head
+
     # This function prints all elements of Linked List
     def display(self,head):
         if head == None:
@@ -54,7 +73,9 @@ head1 = list1.insert(head1,30)
 head1 = list1.insert(head1,40)
 head1 = list1.insert(head1,50)
 list1.display(head1)
-list1.insertAfter(head1,40,45)
+head1 = list1.insertAfter(head1,40,45)
+list1.display(head1)
+head1 = list1.deleteByValue(head1,45)
 list1.display(head1)
 
 head2 = None
