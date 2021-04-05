@@ -18,6 +18,23 @@ class LinkedList:
                 temp = temp.next
             temp.next = Node(new_data)
         return head
+
+
+    # This function will add new node right after the node whose value is given by user
+    def insertAfter(self,head,data,new_data):
+        new_node = Node(new_data)
+        if head == None:
+            if data == None:
+                head = new_node
+            else:
+                print("\n",data,"doesn't exist !\n")
+        else:
+            temp = head
+            while temp.data != data:
+                temp = temp.next
+            new_node.next = temp.next
+            temp.next = new_node
+        return head
     
     # This function prints all elements of Linked List
     def display(self,head):
@@ -36,6 +53,8 @@ head1 = list1.insert(head1,20)
 head1 = list1.insert(head1,30)
 head1 = list1.insert(head1,40)
 head1 = list1.insert(head1,50)
+list1.display(head1)
+list1.insertAfter(head1,40,45)
 list1.display(head1)
 
 head2 = None
