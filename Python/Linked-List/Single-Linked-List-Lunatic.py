@@ -25,35 +25,54 @@ class LinkedList:
 
     # This function will add new node right after the node whose value is given by user
     def insertAfter(self,data,new_data):
-        new_node = Node(new_data)
+
+        # checking if linked list is empty
         if self.head == None:
-            if data == None:
-                self.head = new_node
-            else:
-                print("\n",data,"doesn't exist !\n")
+            print("\nThere is no existing data. First insert some value!\n")
         else:
             temp = self.head
-            while temp.data != data:
+            while temp != None and temp.data != data:
                 temp = temp.next
-            new_node.next = temp.next
-            temp.next = new_node
+
+            # check if temp is at last node
+            if temp == None:
+                print(data,"doesn't exist !\n")
+            else:
+                # Now temp is pointing the node next to which insertion takes place 
+                new_node = Node(new_data)
+                new_node.next = temp.next
+                temp.next = new_node
 
     # This function delete that node whose value is given by user
     def deleteByValue(self,data):
+
+        # checking if linked list is empty
         if self.head == None:
-            print("\nLinked List is Empty !\n")
+            print("\nCan't delete, Linked List is Empty !\n")
+
         else:
+            # if the node to be deleted is head
             if self.head.data == data:
                 del_node = head
                 head = head.next
+                print("\n",del_node.data,"deleted successfully !\n")
+                del del_node
+                
             else:
                 temp = self.head
-                while temp.next.data != data:
+                while temp.next != None and temp.next.data != data:
                     temp = temp.next
-                del_node = temp.next
-                temp.next = del_node.next
-            print("\n",del_node.data,"deleted successfully !\n")
-            del del_node
+                
+                # temp is at last node, and the node to be deleted is not yet found
+                if temp.next == None:
+                    print(data,"doesn't exist !\n")
+                else:
+                    # Here temp will point to the node which is just before the node
+                    # to be deleted
+                    del_node = temp.next
+                    temp.next = del_node.next
+                    print("\n",del_node.data,"deleted successfully !\n")
+                    del del_node
 
 
     # This function prints all elements of Linked List
@@ -76,7 +95,7 @@ list1.insert(50)
 list1.display()
 list1.insertAfter(40,45)
 list1.display()
-list1.deleteByValue(45)
+list1.deleteByValue(590)
 list1.display()
 
 list2 = LinkedList()
