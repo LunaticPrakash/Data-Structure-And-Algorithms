@@ -76,6 +76,37 @@ class LinkedList:
 
         return head
 
+    # This function deletes node based on its index(0,1,2,3,...)
+    def deleteByIndex(self,head,idx):
+        # checking if linked list is empty
+        if head == None:
+            print("\nCan't delete, Linked List is Empty !\n")
+
+        # if the node to be deleted is head
+        elif idx == 0:
+            del_node = head
+            head = head.next
+            print("\nIndex :",idx,"Value :",del_node.data,"deleted successfully!\n")
+            del del_node
+
+        
+        else:
+            temp = head
+            for i in range(idx-1):
+                if temp.next != None:
+                    temp = temp.next
+            if temp.next == None or idx<0:
+                print("\nGiven index is out of range!\n")
+            else:
+                # temp is previous to the node to be deleted
+                del_node = temp.next
+                temp.next = del_node.next
+                print("\nIndex :",idx,"Value :",del_node.data,"deleted successfully!\n")
+                del del_node
+        return head
+
+
+
     # This function prints all elements of Linked List
     def display(self,head):
         if head == None:
@@ -97,4 +128,10 @@ list1.display(head1)
 head1 = list1.insertAfter(head1,40,45)
 list1.display(head1)
 head1 = list1.deleteByValue(head1,45)
+list1.display(head1)
+head1 = list1.deleteByIndex(head1,-2)
+list1.display(head1)
+head1 = list1.deleteByIndex(head1,66)
+list1.display(head1)
+head1 = list1.deleteByIndex(head1,3)
 list1.display(head1)
