@@ -102,6 +102,71 @@ class LinkedList:
                     del del_node
         
 
+    # This function return total number of elements in Linked List        
+    def length(self):
+        if self.head == None:
+            return 0
+        else:
+            count = 0
+            temp = self.head
+            while temp!=None:
+                temp = temp.next
+                count += 1
+            return count
+
+    # This function deletes alternate nodes like node 2,4,6,...
+    def delAlternateNodes(self):
+
+        # checking if linked list is empty
+        if self.head == None:
+            print("\nCan't delete, Linked List is Empty !\n") 
+        
+        elif self.length() == 1:
+            print("\nCan't delete, Only 1 element!\n") 
+
+        else:
+            first = self.head # 1st node
+            second = self.head.next # 2nd node
+            while first != None and second != None:
+                print("first :",first.data,"second :",second.data)
+                first.next = second.next
+                del second
+                first = first.next
+
+                if first != None:
+                    second = first.next
+
+
+    # This function linearly searches the key given by user
+    
+    ######Iterative Approach######
+    def LinearSearch(self,key):
+
+        # checking if linked list is empty
+        if self.head == None:
+            print("\nLinked List is empty!\n")
+            return -1
+        else:
+            temp = self.head
+            while temp != None:
+                if temp.data == key:
+                    return 1
+                temp = temp.next
+            return -1
+
+    ######Recursive Approach######
+
+    # def LinearSearch(self,start,key):
+    #     # checking if linked list is empty
+    #     if start == None:
+    #         return -1
+    #     else:
+    #         temp = start
+    #         if temp.data == key:
+    #             return 1
+    #         return self.LinearSearch(start.next,key)
+            
+
     # This function prints all elements of Linked List
     def display(self):
         if self.head == None:
@@ -122,11 +187,12 @@ list1.insert(50)
 list1.display()
 list1.insertAfter(40,45)
 list1.display()
-list1.deleteByValue(590)
-list1.display()
-list1.deleteByIndex(-2)
-list1.display()
-list1.deleteByIndex(55)
-list1.display()
 list1.deleteByIndex(4)
 list1.display()
+print("\nAlt Delete\n")
+list1.delAlternateNodes()
+list1.display()
+print(list1.LinearSearch(list1.head,1))
+print(list1.LinearSearch(list1.head,300))
+print(list1.LinearSearch(list1.head,40))
+print("length =",list1.length())
