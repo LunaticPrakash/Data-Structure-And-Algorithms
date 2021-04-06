@@ -138,7 +138,7 @@ class LinkedList:
 
 
     # This function linearly searches the key given by user
-    
+
     ######Iterative Approach######
     def LinearSearch(self,key):
 
@@ -165,7 +165,76 @@ class LinkedList:
     #         if temp.data == key:
     #             return 1
     #         return self.LinearSearch(start.next,key)
-            
+
+
+    # This is helper function for BinarySearch()
+    # It returns middle node of Linked List
+    def middle(self,start,last):
+
+        if start == None:
+            return None
+        
+        slow = start
+        fast = start.next
+        
+        while(fast != last):
+            fast = fast.next
+            if  fast != last:
+                fast = fast.next
+                slow = slow.next
+        return slow
+    
+    # This function searches the key given by user by binary approach
+    def BinarySearch(self,start,last,key):
+        if start != None and start != last:
+            mid = self.middle(start,last)
+
+            if mid == None:
+                return -1
+            elif mid.data == key:
+                return 1
+            elif mid.data > key:
+                return self.BinarySearch(start,mid,key)
+            elif mid.data < key:
+                return self.BinarySearch(mid.next,last,key)
+        
+        return -1
+
+    # This function sorts the linked list based on data
+    def BubbleSort(self):
+        # checking if linked list is empty
+        if self.head == None:
+            print("\nLinked List is empty!\n")
+        else:
+            temp1 = self.head
+            while temp1 != None:
+                temp2 = self.head
+                while temp2.next != None:
+                    if temp2.data > temp2.next.data:
+                        # swapping
+                        temp2.data, temp2.next.data = temp2.next.data, temp2.data
+                    temp2 = temp2.next
+                temp1 = temp1.next
+
+    # This function sorts the linked list based on data
+    def SelectionSort(self):
+        # checking if linked list is empty
+        if self.head == None:
+            print("\nLinked List is empty!\n")
+        else:
+            temp1 = self.head
+            while temp1 != None:
+                min_node = temp1
+                temp2 = temp1.next
+                while temp2!= None:
+                    if min_node.data > temp2.data:
+                        min_node = temp2
+                    temp2 = temp2.next
+                # swapping                        
+                temp1.data, min_node.data = min_node.data, temp1.data
+                temp1 = temp1.next
+
+                
 
     # This function prints all elements of Linked List
     def display(self):
@@ -180,19 +249,15 @@ class LinkedList:
             
            
 list1 = LinkedList()
-list1.insert(20)
+list1.insert(120)
 list1.insert(30)
 list1.insert(40)
-list1.insert(50)
+list1.insert(0)
+list1.insert(2)
+list1.insert(0)
 list1.display()
-list1.insertAfter(40,45)
+list1.insertAfter(40,-5)
 list1.display()
-list1.deleteByIndex(4)
+list1.SelectionSort()
 list1.display()
-print("\nAlt Delete\n")
-list1.delAlternateNodes()
-list1.display()
-print(list1.LinearSearch(list1.head,1))
-print(list1.LinearSearch(list1.head,300))
-print(list1.LinearSearch(list1.head,40))
 print("length =",list1.length())
