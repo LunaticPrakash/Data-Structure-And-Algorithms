@@ -234,8 +234,41 @@ class LinkedList:
                 temp1.data, min_node.data = min_node.data, temp1.data
                 temp1 = temp1.next
 
-                
+    # This function displays the frequency of every elements           
+    def FrequencyOfElements(self):
+        # checking if linked list is empty
+        if self.head == None:
+            print("\nLinked List is empty!\n")
+        else:
+            d = {}
+            temp1 = self.head
+            while temp1 != None:
+                if temp1.data in d:
+                    d[temp1.data] += 1
+                else:
+                    d[temp1.data] = 1
+                temp1 = temp1.next
+            print(d)
+            
+                    
+    # This function checks if there is loop in Linked List
+    def checkLoop(self):
+        ########Floyd’s Cycle-Finding Algorithm#########
+        '''Traverse linked list using two pointers.Move one pointer
+        slow by one and another pointer fast by two. If they become
+        equal then loop exists'''
+        slow = self.head
+        fast = self.head
 
+        while slow != None and fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+
+            if slow == fast:
+                return True
+        return False
+
+        
     # This function prints all elements of Linked List
     def display(self):
         if self.head == None:
@@ -249,15 +282,22 @@ class LinkedList:
             
            
 list1 = LinkedList()
-list1.insert(120)
-list1.insert(30)
-list1.insert(40)
 list1.insert(0)
+list1.insert(1)
 list1.insert(2)
+list1.insert(1)
+list1.insert(1)
+list1.insert(1)
+list1.insert(2)
+list1.insert(12)
+list1.insert(13)
+list1.insert(12)
 list1.insert(0)
 list1.display()
 list1.insertAfter(40,-5)
 list1.display()
 list1.SelectionSort()
 list1.display()
+list1.FrequencyOfElements()
+print(list1.checkLoop())
 print("length =",list1.length())
