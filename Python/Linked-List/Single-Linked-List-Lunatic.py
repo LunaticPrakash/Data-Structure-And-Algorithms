@@ -53,8 +53,8 @@ class LinkedList:
         else:
             # if the node to be deleted is head
             if self.head.data == data:
-                del_node = head
-                head = head.next
+                del_node = self.head
+                self.head = self.head.next
                 print("\n",del_node.data,"deleted successfully !\n")
                 del del_node
                 
@@ -297,18 +297,83 @@ class LinkedList:
                 temp = temp.next
             print("None")
             
-           
-list1 = LinkedList()
-list1.insert(0)
-list1.insert(1)
-list1.insert(2)
-list1.insert(12)
-list1.insert(13)
-list1.display()
-list1.SelectionSort()
-list1.display()
-list1.FrequencyOfElements()
-print(list1.checkLoop())
-print("length =",list1.length())
-list1.reverse_list()
-list1.display()
+
+# driver code
+
+my_list = LinkedList()
+
+while True:
+    print("\n1. Insert \n2. Delete \n3. Display \n4. Length of Linked List \n5. Searching \
+        \n6. Sorting \n7. Extra Functions \n8. Exit \n")
+    choice = int(input("Enter your choice :  "))
+
+    if choice == 1:
+        data = int(input("\nEnter data to insert : "))
+        a = int(input("1. Insert in last \n2. Insert after a value \n"))
+        if a == 1:
+            my_list.insert(data)
+            print("\nInserted Successfully!\n")
+        elif a == 2:
+            temp = int(input("Enter value after which", data, "is inserted : "))
+            my_list.insertAfter(temp,data)
+            print("\nInserted Successfully!\n")
+        
+    elif choice == 2:
+        a = int(input("1. Delete by value \n2. Delete by index \n3. Delete Alternate Nodes \n"))
+        if a == 1:
+            data = int(input("\nEnter data to delete :  "))
+            my_list.deleteByValue(data)
+        elif a == 2:
+            idx = int(input("\nEnter index to delete :  "))
+            my_list.deleteByIndex(idx)
+        elif a == 3:
+            my_list.delAlternateNodes()
+            print("\nAlternate Nodes deleted successfully\n")
+
+    elif choice == 3:
+        my_list.display()
+
+    elif choice == 4:
+        print("\nTotal elements in Linked List = ",my_list.length())
+
+    elif choice == 5:
+        data = int(input("\nEnter element to find : "))
+        a = int(input("\n1. Linear Search \n2. Binary Search \n"))
+        if a == 1:
+            result = my_list.LinearSearch(data)
+        elif a ==2:
+            result = my_list.BinarySearch(my_list.head,None,data)
+        if result == -1:
+            print(data,"not found!\n")
+        else:
+            print(data,"found!\n")
+
+    elif choice == 6:
+        a = int(input("1. Bubble Sort \n2. Selection Sort \n"))
+        if a == 1:
+            my_list.BubbleSort()
+        elif a == 2:
+            my_list.SelectionSort()
+        print("\nSorted Array is : ")   
+        my_list.display()
+
+    elif choice == 7:
+        a = int(input("\n1. Frequency of Elements \n2. Reverse Linked List \n3. Detect Loop \n"))
+        if a == 1:
+            my_list.FrequencyOfElements()
+        elif a == 2:
+            my_list.reverse_list()
+            print("\nReversed Linked List : - ")
+            my_list.display()
+        elif a == 3:
+            loop = my_list.checkLoop()
+            if loop == True:
+                print("\nLoop exists!\n")
+            else:
+                print("\nLoop doesn't exists!\n")
+
+    elif choice == 8:    
+        break
+
+    else:
+        print("\nWrong Choice !\n")
