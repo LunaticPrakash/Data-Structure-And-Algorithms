@@ -275,12 +275,15 @@ class LinkedList:
             return
         pre = None
         curr = self.head
+        nex = curr.next
 
         while curr != None:
-            nex = curr.next
             curr.next = pre
             pre = curr
             curr = nex
+
+            if nex != None:
+                nex = nex.next
         self.head = pre  
 
     # This function prints all elements of Linked List
