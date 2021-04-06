@@ -268,7 +268,21 @@ class LinkedList:
                 return True
         return False
 
-        
+    # This function reverses the Linked List
+    def reverse_list(self) :
+
+        if self.head == None or self.head.next == None:
+            return
+        pre = None
+        curr = self.head
+
+        while curr != None:
+            nex = curr.next
+            curr.next = pre
+            pre = curr
+            curr = nex
+        self.head = pre  
+
     # This function prints all elements of Linked List
     def display(self):
         if self.head == None:
@@ -285,19 +299,13 @@ list1 = LinkedList()
 list1.insert(0)
 list1.insert(1)
 list1.insert(2)
-list1.insert(1)
-list1.insert(1)
-list1.insert(1)
-list1.insert(2)
 list1.insert(12)
 list1.insert(13)
-list1.insert(12)
-list1.insert(0)
-list1.display()
-list1.insertAfter(40,-5)
 list1.display()
 list1.SelectionSort()
 list1.display()
 list1.FrequencyOfElements()
 print(list1.checkLoop())
 print("length =",list1.length())
+list1.reverse_list()
+list1.display()
