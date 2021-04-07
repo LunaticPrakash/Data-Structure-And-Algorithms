@@ -34,7 +34,7 @@ class LinkedList:
             while temp != None and temp.data != data:
                 temp = temp.next
 
-            # check if temp is at last node
+            # check if temp is at None
             if temp == None:
                 print(data,"doesn't exist !\n")
             else:
@@ -77,22 +77,22 @@ class LinkedList:
 # This function deletes node based on its index(0,1,2,3,...)
     def deleteByIndex(self,idx):
         # checking if linked list is empty
-        if self.head == None:
+        if self.head == N;one:
             print("\nCan't delete, Linked List is Empty !\n")
             
         # if the node to be deleted is head        
         else:
             if idx == 0:
                 del_node = self.head
-                head = head.next
+                self.head = self.head.next
                 print("\nIndex :",idx,"Value :",del_node.data,"deleted successfully!\n")
                 del del_node
             else:
                 temp = self.head
                 for i in range(idx-1):
-                    if temp.next != None:
+                    if temp != None:
                         temp = temp.next
-                if temp.next == None or idx<0:
+                if temp == None or idx<0:
                     print("\nGiven index is out of range!\n")
                 else:
                     # temp is previous to the node to be deleted
@@ -128,7 +128,6 @@ class LinkedList:
             first = self.head # 1st node
             second = self.head.next # 2nd node
             while first != None and second != None:
-                print("first :",first.data,"second :",second.data)
                 first.next = second.next
                 del second
                 first = first.next
