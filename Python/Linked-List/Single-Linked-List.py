@@ -313,7 +313,7 @@ while True:
             my_list.insert(data)
             print("\nInserted Successfully!\n")
         elif a == 2:
-            temp = int(input("Enter value after which", data, "is inserted : "))
+            temp = int(input("Enter value after which given value is inserted : "))
             my_list.insertAfter(temp,data)
             print("\nInserted Successfully!\n")
         
