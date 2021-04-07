@@ -77,7 +77,7 @@ class LinkedList:
 # This function deletes node based on its index(0,1,2,3,...)
     def deleteByIndex(self,idx):
         # checking if linked list is empty
-        if self.head == N;one:
+        if self.head == None:
             print("\nCan't delete, Linked List is Empty !\n")
             
         # if the node to be deleted is head        
