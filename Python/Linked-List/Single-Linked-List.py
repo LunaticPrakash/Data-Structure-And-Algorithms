@@ -160,8 +160,7 @@ class LinkedList:
     #     if start == None:
     #         return -1
     #     else:
-    #         temp = start
-    #         if temp.data == key:
+    #         if start.data == key:
     #             return 1
     #         return self.LinearSearch(start.next,key)
 
