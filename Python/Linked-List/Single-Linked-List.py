@@ -284,6 +284,18 @@ class LinkedList:
                 nex = nex.next
         self.head = pre  
 
+    def removeDuplicates(self):
+        if self.head == None:
+            return head
+        else:
+            temp = self.head
+            while temp.next != None:
+                if temp.data == temp.next.data:
+                    temp.next = temp.next.next
+                else:
+                    temp = temp.next
+
+
     # This function prints all elements of Linked List
     def display(self):
         if self.head == None:
@@ -356,7 +368,7 @@ while True:
         my_list.display()
 
     elif choice == 7:
-        a = int(input("\n1. Frequency of Elements \n2. Reverse Linked List \n3. Detect Loop \n"))
+        a = int(input("\n1. Frequency of Elements \n2. Reverse Linked List \n3. Detect Loop \n4. Remove Duplicate Elements from Sorted Linked List \n"))
         if a == 1:
             my_list.FrequencyOfElements()
         elif a == 2:
@@ -369,6 +381,8 @@ while True:
                 print("\nLoop exists!\n")
             else:
                 print("\nLoop doesn't exists!\n")
+        elif a == 4:
+            my_list.removeDuplicates()
 
     elif choice == 8:    
         break
