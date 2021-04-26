@@ -96,5 +96,7 @@ my_graph.show_edges()
 print("\nAll Path from 1 to 6 :-")
 my_graph.find_all_path(1,6)
 
-print("\nBFS Path : ",my_graph.bfs(1))
+print("\nDFS Path (starting vertex 1): ",my_graph.dfs(1))
+
+print("\nBFS Path (starting vertex 1): ",my_graph.bfs(1))
 
