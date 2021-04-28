@@ -173,16 +173,14 @@ class LinkedList:
             return None
         
         slow = start
-        fast = start.next
-        
-        while(fast != last):
-            fast = fast.next
-            if  fast != last:
-                fast = fast.next
-                slow = slow.next
+        fast = start
+
+        while fast != last and fast.next != last:
+            slow = slow.next
+            fast = fast.next.next
         return slow
     
-    # This function searches the key given by user by binary approach
+    # This function sear5ches the key given by user by binary approach
     def BinarySearch(self,start,last,key):
         if start != None and start != last:
             mid = self.middle(start,last)
