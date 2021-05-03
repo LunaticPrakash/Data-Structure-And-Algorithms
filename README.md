@@ -47,3 +47,11 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
   - Reverse Linked List (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC375">C++</a> | <a href="Python/Linked-List/Single-Linked-List.py#LC272">Python</a>)
   - Detect If Loop Exists (<a href="C++/Linked-List/Singly-Linked-List.cpp#LC355">C++</a> | <a href="Python/Linked-List/Single-Linked-List.py#LC255">Python</a>)
     
+
+## Graph :- 
+  - Adding Edges (<a href="Python/Graph/Graph.py#LC5">Python</a>)
+  - Printing Edges (<a href="Python/Graph/Graph.py#LC11">Python</a>)
+  - Finding one path between two given vertex (<a href="Python/Graph/Graph.py#LC16">Python</a>)
+  - Finding all path between two given vertex (<a href="Python/Graph/Graph.py#LC30">Python</a>)
+  - Depth First Search-DFS (Both Iterative and Recursive) (<a href="Python/Graph/Graph.py#LC42">Python</a>)
+  - Breadth First Search-BFS (<a href="Python/Graph/Graph.py#LC67">Python</a>)
