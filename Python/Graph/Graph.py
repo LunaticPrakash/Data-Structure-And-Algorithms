@@ -8,10 +8,19 @@ class Graph:
         else:
             self.graph_dict[node] = [neighbour]
 
-    def show_edges(self):
+    def print_edges(self):
         for node in self.graph_dict:
             for neighbour in self.graph_dict[node]:
                 print(node,"->",neighbour)
+
+    def print_graph(self,graph):
+        V = len(graph)
+        for i in range(V):
+            for j in range(V):
+                  print(graph[i][j],end="  ")
+
+            print("\n")
+
 
     def find_path(self,start,end,path=[]):
     
@@ -70,6 +79,7 @@ class Graph:
         traversed = []
 
         queue.append(v)
+        visited.add(v)
         while queue:
             v = queue.pop(0)
             traversed.append(v)
@@ -81,8 +91,19 @@ class Graph:
                         visited.add(w)
         return traversed
 
+    def warshall_algo(self,graph):
 
-my_graph = Graph() 
+        T = graph
+        V = len(graph)
+        for k in range(V):
+            for i in range(V):
+                for j in range(V):
+                    T[i][j] = T[i][j] or (T[i][k] and T[k][j])
+        self.print_graph(T)
+        
+
+my_graph = Graph()
+
 my_graph.add_edges(1,2)
 my_graph.add_edges(1,3)
 my_graph.add_edges(1,4)      
@@ -90,8 +111,8 @@ my_graph.add_edges(2,5)
 my_graph.add_edges(2,6)
 my_graph.add_edges(3,6)
 
-
-my_graph.show_edges()
+print("\nAll edges present in graph :- ")
+my_graph.print_edges()
 
 print("\nAll Path from 1 to 6 :-")
 my_graph.find_all_path(1,6)
@@ -99,4 +120,11 @@ my_graph.find_all_path(1,6)
 print("\nDFS Path (starting vertex 1): ",my_graph.dfs(1))
 
 print("\nBFS Path (starting vertex 1): ",my_graph.bfs(1))
+
+graph = [[0, 0, 1, 0],
+         [1, 0, 0, 1],
+         [0, 0, 0, 0],
+         [0, 1, 0, 0]] 
+print("\nTransitive Closure :- \n")
+my_graph.warshall_algo(graph)
 
