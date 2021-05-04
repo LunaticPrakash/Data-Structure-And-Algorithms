@@ -18,7 +18,7 @@ class Graph:
         for i in range(V):
             for j in range(V):
                 if graph[i][j] == INF:
-                    print("N", end ="  ")
+                    print("N", end="  ")
                 else:
                     print(graph[i][j], end="  ")
 
@@ -143,10 +143,10 @@ graph2 = [[1, 1, 0, 1],
           [0, 0, 0, 1]]
 
 INF = 9999
-cm1 = [[0, 5, INF, 10],
-       [INF, 0, 3, INF],
-       [INF, INF, 0,   1],
-       [INF, INF, INF, 0]
+cm1 = [[0, 8, INF, 1],
+       [INF, 0, 1, INF],
+       [4, INF, 0, INF],
+       [INF, 2, 9, 0]
        ]
 
 print("\nTransitive Closure :- \n")
