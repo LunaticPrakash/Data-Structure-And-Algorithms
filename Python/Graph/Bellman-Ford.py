@@ -39,7 +39,7 @@ class Graph:
         # is a cycle.
         for u, v, w in self.graph:
             if dist[v] > dist[u]+w:
-                print("Graph contains negative weight cycle")
+                print("\nGraph contains negative weight cycle")
                 return
 
         self.print_result(dist)
@@ -55,5 +55,8 @@ my_graph.add_edges_with_weight(1, 4, 3)
 my_graph.add_edges_with_weight(2, 1, 1)
 my_graph.add_edges_with_weight(2, 4, 5)
 my_graph.add_edges_with_weight(4, 3, -5)
+
+# uncomment below line to create negative weight cycle among node 3 & 4
+# my_graph.add_edges_with_weight(3, 4, -2)
 
 my_graph.bellman_ford(0, 5)
