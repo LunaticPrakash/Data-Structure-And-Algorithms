@@ -55,3 +55,6 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
   - Finding all path between two given vertex (<a href="Python/Graph/Graph.py#LC30">Python</a>)
   - Depth First Search-DFS (Both Iterative and Recursive) (<a href="Python/Graph/Graph.py#LC42">Python</a>)
   - Breadth First Search-BFS (<a href="Python/Graph/Graph.py#LC67">Python</a>)
+  - Warshall Algorithm (<a href="Python/Graph/Graph.py#LC96">Python</a>)
+  - Floyd Warshall Algorithm (<a href="Python/Graph/Graph.py#LC106">Python</a>)
+  - Bellman Ford Algorithm (<a href="Python/Graph/Bellman-Ford.py">Python</a>)
