@@ -58,3 +58,4 @@ Self Explanatory code for the topics related to Array, Linked List, Stack, Queue
   - Warshall Algorithm (<a href="Python/Graph/Graph.py#LC96">Python</a>)
   - Floyd Warshall Algorithm (<a href="Python/Graph/Graph.py#LC106">Python</a>)
   - Bellman Ford Algorithm (<a href="Python/Graph/Bellman-Ford.py">Python</a>)
+  - Dijkstra's Algorithm (<a href="Python/Graph/Dijkstra-Algorithm.py">Python</a>)
