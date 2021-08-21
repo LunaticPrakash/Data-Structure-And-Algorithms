@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Scanner;
 
 class Node<T> {
@@ -115,7 +116,7 @@ class LinkedList<T> {
         return head;
     }
 
-    public T getMiddleElement(Node<T> head) {
+    public Node<T> getMiddleElement(Node<T> head) {
         if (head == null) {
             System.out.println("\nLinked List is empty!");
             return null;
@@ -126,11 +127,14 @@ class LinkedList<T> {
                 slow = slow.next;
                 fast = fast.next.next;
             }
-            return slow.data;
+            return slow;
         }
     }
 
     public Node<T> middle(Node<T> start, Node<T> end) {
+        if (start == null)
+            return null;
+
         Node<T> slow = start;
         Node<T> fast = start;
         while (fast != end && fast.next != end) {
@@ -184,21 +188,18 @@ class LinkedList<T> {
         Node<T> slow = head.next;
         Node<T> fast = head.next.next;
         while (fast != null && fast.next != null) {
-            if (slow == fast)
-                break;
+            if (slow == fast) {
+                slow = head;
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow;
+            }
             slow = slow.next;
             fast = fast.next;
         }
-        if (slow != fast)
-            return null;
-
-        slow = head;
-        while (slow != fast) {
-            slow = slow.next;
-            fast = fast.next;
-        }
-        return slow;
-
+        return null;
     }
 
     public int lengthLoop(Node<T> head) {
@@ -250,6 +251,134 @@ class LinkedList<T> {
             fast.next = null;
         }
         return head;
+    }
+
+    public Node<T> reverse(Node<T> head) {
+        Node<T> pre = null, curr = head, nex = null;
+        while (curr != null) {
+            nex = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = nex;
+        }
+        return pre;
+    }
+
+    public Node<T> reverseRec(Node<T> head) {
+        if (head == null || head.next == null)
+            return head;
+        Node<T> rest = reverseRec(head.next);
+        head.next.next = head;
+        head.next = null;
+        return rest;
+    }
+
+    public Node<T> reverseGroup(Node<T> head, int k) {
+        if (head == null) // head.next == null for 1 element to reverse it fails
+            return head;
+
+        Node<T> pre = null, curr = head, nex = null;
+        int count = 0;
+        while (count < k && curr != null) {
+            nex = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = nex;
+            count++;
+        }
+
+        if (nex != null) {
+            head.next = reverseGroup(nex, k);
+        }
+        return pre;
+    }
+
+    public Node<T> removeDuplicatesSorted(Node<T> head) {
+        Node<T> first = head;
+        while (first != null) {
+            Node<T> second = first.next;
+            while (second != null && first.data == second.data)
+                second = second.next;
+            first.next = second;
+            first = first.next;
+        }
+        return head;
+    }
+
+    public Node<T> removeDuplicatesSortedRec(Node<T> head) {
+        if (head != null && head.next != null) {
+            if (head.data == head.next.data) {
+                Node<T> del = head.next;
+                head.next = del.next;
+                removeDuplicatesSortedRec(head);
+            } else {
+                removeDuplicatesSortedRec(head.next);
+            }
+        }
+        return head;
+    }
+
+    public Node<T> removeDuplicatesUnsortedRec(Node<T> head) {
+        HashSet<T> set = new HashSet<>();
+        Node<T> pre = null, curr = head;
+        while (curr != null) {
+            T currval = curr.data;
+            if (set.contains(currval)) {
+                pre.next = curr.next;
+            } else {
+                set.add(currval);
+                pre = curr;
+            }
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    public Node<T> moveLastToFront(Node<T> head) {
+        if (head == null)
+            return head;
+
+        Node<T> temp = head;
+        while (temp.next.next != null)
+            temp = temp.next;
+        Node<T> lastNode = temp.next;
+        temp.next = null;
+        lastNode.next = head;
+        head = lastNode;
+        return head;
+    }
+
+    // L0 → L1 → … → Ln - 1 → Ln
+    // Reorder the list to be on the following form:
+    // L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 ->
+    public Node<T> alternateMerge(Node<T> head1, Node<T> head2) {
+        Node<T> head = head1;
+        while (head1.next != null && head2.next != null) {
+            Node<T> temp = head1.next;
+            head1.next = head2;
+            head1 = temp;
+
+            temp = head2.next;
+            head2.next = head1;
+            head2 = temp;
+        }
+        return head;
+    }
+
+    public Node<T> reorder(Node<T> head) {
+        Node<T> head2 = getMiddleElement(head);
+        head2 = reverse(head2);
+        head = alternateMerge(head, head2);
+        return head;
+    }
+
+    public int length(Node<T> head) {
+        int len = 0;
+        while (head != null) {
+            head = head.next;
+            len++;
+        }
+        return len;
     }
 
     public void display(Node<T> head) {
@@ -318,7 +447,9 @@ public class SingleLinkedList {
                     break;
 
                 case 4:
-                    System.out.println("\n1. Middle Element\n2. Binary Search\n3. Check Loop\n4. Remove Loop\n");
+                    System.out.println("\n1. Middle Element\n2. Binary Search\n3. Check Loop\n4. Remove Loop"
+                            + "\n5. Reverse" + "  \n6. Remove Duplicates\n7. Move Last to Front"
+                            + "\n8. Reorder List (LeetCode)\n9. Get Number\n");
                     a = in.nextInt();
                     if (a == 1)
                         System.out.println("\nMiddle Element = " + list.getMiddleElement(head));
@@ -330,8 +461,11 @@ public class SingleLinkedList {
                         System.out.println("\nLoop Exist = " + list.checkLoop(head));
                         System.out.println("\nLength of Loop = " + list.lengthLoop(head));
                     } else if (a == 4)
-                        list.removeLoop(head);
-
+                        head = list.removeLoop(head);
+                    else if (a == 5)
+                        head = list.reverseGroup(head, 3);
+                    else if (a == 6)
+                        head = list.removeDuplicatesSortedRec(head);
                     break;
 
                 case 5:
