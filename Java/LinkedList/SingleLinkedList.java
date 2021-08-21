@@ -1,23 +1,23 @@
 import java.util.HashSet;
 import java.util.Scanner;
 
-class Node<T> {
-    public T data;
-    public Node<T> next;
+class Node {
+    public int data;
+    public Node next;
 
-    public Node(T data) {
+    public Node(int data) {
         this.data = data;
         this.next = null;
     }
 }
 
-class LinkedList<T> {
+class LinkedList {
 
-    public Node<T> insertAtBeg(Node<T> head, T data) {
+    public Node insertAtBeg(Node head, int data) {
         if (head == null) {
-            head = new Node<T>(data);
+            head = new Node(data);
         } else {
-            Node<T> newNode = new Node<T>(data);
+            Node newNode = new Node(data);
             newNode.next = head;
             head = newNode;
         }
@@ -25,60 +25,60 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> insertAtEnd(Node<T> head, T data) {
+    public Node insertAtEnd(Node head, int data) {
         if (head == null) {
-            head = new Node<T>(data);
+            head = new Node(data);
         } else {
-            Node<T> temp = head;
+            Node temp = head;
             while (temp.next != null)
                 temp = temp.next;
-            temp.next = new Node<T>(data);
+            temp.next = new Node(data);
         }
         return head;
     }
 
-    public Node<T> insertAtIndex(Node<T> head, int index, T data) {
+    public Node insertAtIndex(Node head, int index, int data) {
         if (index < 0)
             return head;
         else if (head == null && index != 0)
             return head;
         else if (index == 0) {
-            Node<T> newNode = new Node<T>(data);
+            Node newNode = new Node(data);
             newNode.next = head;
             head = newNode;
         } else {
-            Node<T> temp = head;
+            Node temp = head;
             for (int i = 0; i < index - 1 && temp != null; i++)
                 temp = temp.next;
             if (temp.next == null)
                 return head;
-            Node<T> newNode = new Node<>(data);
+            Node newNode = new Node(data);
             newNode.next = temp.next;
             temp.next = newNode;
         }
         return head;
     }
 
-    public Node<T> deleteByData(Node<T> head, T data) {
+    public Node deleteByData(Node head, int data) {
         if (head == null)
             System.out.println("\nLinked List is empty!");
         else if (head.data == data) {
             head = head.next;
             System.out.println("\nDeleted : " + data + "\n");
         } else {
-            Node<T> temp = head;
+            Node temp = head;
             while (temp.next != null && temp.next.data != data)
                 temp = temp.next;
             if (temp.next == null)
                 return head;
-            Node<T> delNode = temp.next;
+            Node delNode = temp.next;
             temp.next = delNode.next;
             System.out.println("\nDeleted : " + delNode.data + "\n");
         }
         return head;
     }
 
-    public Node<T> deleteByIndex(Node<T> head, int index) {
+    public Node deleteByIndex(Node head, int index) {
         if (head == null)
             System.out.println("\nLinked List is empty!");
         else if (index < 0)
@@ -87,24 +87,24 @@ class LinkedList<T> {
             System.out.println("\nDeleted : " + head.data);
             head = head.next;
         } else {
-            Node<T> temp = head;
+            Node temp = head;
             for (int i = 0; i < index - 1 && temp.next != null; i++)
                 temp = temp.next;
             if (temp.next == null)
                 return head;
-            Node<T> delNode = temp.next;
+            Node delNode = temp.next;
             temp.next = delNode.next;
             System.out.println("\nDeleted : " + head.data);
         }
         return head;
     }
 
-    public Node<T> deleteAlternatNode(Node<T> head) {
+    public Node deleteAlternatNode(Node head) {
         if (head == null)
             System.out.println("\nLinked List is empty!");
         else {
-            Node<T> curr = head;
-            Node<T> del = head.next;
+            Node curr = head;
+            Node del = head.next;
 
             while (curr != null && del != null) {
                 curr.next = del.next;
@@ -116,13 +116,13 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> getMiddleElement(Node<T> head) {
+    public Node getMiddleElement(Node head) {
         if (head == null) {
             System.out.println("\nLinked List is empty!");
-            return null;
+            return head;
         } else {
-            Node<T> slow = head;
-            Node<T> fast = head;
+            Node slow = head;
+            Node fast = head;
             while (fast != null && fast.next != null) {
                 slow = slow.next;
                 fast = fast.next.next;
@@ -131,12 +131,12 @@ class LinkedList<T> {
         }
     }
 
-    public Node<T> middle(Node<T> start, Node<T> end) {
+    public Node middle(Node start, Node end) {
         if (start == null)
             return null;
 
-        Node<T> slow = start;
-        Node<T> fast = start;
+        Node slow = start;
+        Node fast = start;
         while (fast != end && fast.next != end) {
             slow = slow.next;
             fast = fast.next.next;
@@ -144,10 +144,10 @@ class LinkedList<T> {
         return slow;
     }
 
-    public boolean binarySearch(Node<T> head, Node<T> end, T key) {
+    public boolean binarySearch(Node head, Node end, int key) {
         if (head == null || head == end)
             return false;
-        Node<T> mid = middle(head, end);
+        Node mid = middle(head, end);
         if (mid == null)
             return false;
 
@@ -157,20 +157,20 @@ class LinkedList<T> {
         else if (mid.next == null)
             return false;
 
-        else if (Integer.valueOf(String.valueOf(mid.data)) < Integer.valueOf(String.valueOf(key)))
+        else if (mid.data < key)
             return binarySearch(mid, end, key);
 
-        else if (Integer.valueOf(String.valueOf(mid.data)) > Integer.valueOf(String.valueOf(key)))
+        else if (mid.data > key)
             return binarySearch(head, mid, key);
 
         return false;
     }
 
-    public boolean checkLoop(Node<T> head) {
+    public boolean checkLoop(Node head) {
         if (head == null || head.next == null)
             return false;
-        Node<T> slow = head.next;
-        Node<T> fast = head.next.next;
+        Node slow = head.next;
+        Node fast = head.next.next;
 
         while (fast != null && fast.next != null) {
             if (slow == fast)
@@ -181,12 +181,12 @@ class LinkedList<T> {
         return false;
     }
 
-    public Node<T> getStartLoop(Node<T> head) {
+    public Node getStartLoop(Node head) {
         if (head == null || head.next == null)
             return null;
 
-        Node<T> slow = head.next;
-        Node<T> fast = head.next.next;
+        Node slow = head.next;
+        Node fast = head.next.next;
         while (fast != null && fast.next != null) {
             if (slow == fast) {
                 slow = head;
@@ -202,12 +202,12 @@ class LinkedList<T> {
         return null;
     }
 
-    public int lengthLoop(Node<T> head) {
+    public int lengthLoop(Node head) {
         if (head == null || head.next == null)
             return 0;
 
-        Node<T> slow = head.next;
-        Node<T> fast = head.next.next;
+        Node slow = head.next;
+        Node fast = head.next.next;
         int count = 0;
         while (fast != null && fast.next != null) {
             if (slow == fast) {
@@ -224,11 +224,11 @@ class LinkedList<T> {
         return count;
     }
 
-    public Node<T> removeLoop(Node<T> head) {
+    public Node removeLoop(Node head) {
         if (head == null || head.next == null)
             return head;
-        Node<T> slow = head.next;
-        Node<T> fast = head.next.next;
+        Node slow = head.next;
+        Node fast = head.next.next;
 
         while (fast != null && fast.next != null) {
             if (slow == fast)
@@ -253,8 +253,8 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> reverse(Node<T> head) {
-        Node<T> pre = null, curr = head, nex = null;
+    public Node reverse(Node head) {
+        Node pre = null, curr = head, nex = null;
         while (curr != null) {
             nex = curr.next;
             curr.next = pre;
@@ -264,20 +264,20 @@ class LinkedList<T> {
         return pre;
     }
 
-    public Node<T> reverseRec(Node<T> head) {
+    public Node reverseRec(Node head) {
         if (head == null || head.next == null)
             return head;
-        Node<T> rest = reverseRec(head.next);
+        Node rest = reverseRec(head.next);
         head.next.next = head;
         head.next = null;
         return rest;
     }
 
-    public Node<T> reverseGroup(Node<T> head, int k) {
+    public Node reverseGroup(Node head, int k) {
         if (head == null) // head.next == null for 1 element to reverse it fails
             return head;
 
-        Node<T> pre = null, curr = head, nex = null;
+        Node pre = null, curr = head, nex = null;
         int count = 0;
         while (count < k && curr != null) {
             nex = curr.next;
@@ -293,10 +293,10 @@ class LinkedList<T> {
         return pre;
     }
 
-    public Node<T> removeDuplicatesSorted(Node<T> head) {
-        Node<T> first = head;
+    public Node removeDuplicatesSorted(Node head) {
+        Node first = head;
         while (first != null) {
-            Node<T> second = first.next;
+            Node second = first.next;
             while (second != null && first.data == second.data)
                 second = second.next;
             first.next = second;
@@ -305,10 +305,10 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> removeDuplicatesSortedRec(Node<T> head) {
+    public Node removeDuplicatesSortedRec(Node head) {
         if (head != null && head.next != null) {
             if (head.data == head.next.data) {
-                Node<T> del = head.next;
+                Node del = head.next;
                 head.next = del.next;
                 removeDuplicatesSortedRec(head);
             } else {
@@ -318,11 +318,11 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> removeDuplicatesUnsortedRec(Node<T> head) {
-        HashSet<T> set = new HashSet<>();
-        Node<T> pre = null, curr = head;
+    public Node removeDuplicatesUnsortedRec(Node head) {
+        HashSet<Integer> set = new HashSet<>();
+        Node pre = null, curr = head;
         while (curr != null) {
-            T currval = curr.data;
+            int currval = curr.data;
             if (set.contains(currval)) {
                 pre.next = curr.next;
             } else {
@@ -334,14 +334,14 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> moveLastToFront(Node<T> head) {
+    public Node moveLastToFront(Node head) {
         if (head == null)
             return head;
 
-        Node<T> temp = head;
+        Node temp = head;
         while (temp.next.next != null)
             temp = temp.next;
-        Node<T> lastNode = temp.next;
+        Node lastNode = temp.next;
         temp.next = null;
         lastNode.next = head;
         head = lastNode;
@@ -351,10 +351,10 @@ class LinkedList<T> {
     // L0 → L1 → … → Ln - 1 → Ln
     // Reorder the list to be on the following form:
     // L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 ->
-    public Node<T> alternateMerge(Node<T> head1, Node<T> head2) {
-        Node<T> head = head1;
+    public Node alternateMerge(Node head1, Node head2) {
+        Node head = head1;
         while (head1.next != null && head2.next != null) {
-            Node<T> temp = head1.next;
+            Node temp = head1.next;
             head1.next = head2;
             head1 = temp;
 
@@ -365,14 +365,14 @@ class LinkedList<T> {
         return head;
     }
 
-    public Node<T> reorder(Node<T> head) {
-        Node<T> head2 = getMiddleElement(head);
+    public Node reorder(Node head) {
+        Node head2 = getMiddleElement(head);
         head2 = reverse(head2);
         head = alternateMerge(head, head2);
         return head;
     }
 
-    public int length(Node<T> head) {
+    public int length(Node head) {
         int len = 0;
         while (head != null) {
             head = head.next;
@@ -381,11 +381,171 @@ class LinkedList<T> {
         return len;
     }
 
-    public void display(Node<T> head) {
+    public int getNumber(Node head) {
+        if (head != null) {
+            int n = length(head);
+            n = (int) (Math.pow(10, n - 1));
+            Node curr = head;
+            int num = 0;
+            while (curr != null) {
+                num = num + curr.data * n;
+                curr = curr.next;
+                n = n / 10;
+            }
+            return num;
+        }
+        return -111111;
+    }
+
+    public Node addOneUtils(Node head) {
+
+        Node res = head, temp = null;
+        int carry = 1, sum = 0;
+        while (head != null) {
+            sum = carry + head.data;
+            carry = sum >= 10 ? 1 : 0;
+            sum = sum % 10;
+            head.data = sum;
+            temp = head;
+            head = head.next;
+        }
+        if (carry > 0)
+            temp.next = new Node(carry);
+        return res;
+    }
+
+    public Node addOne(Node head) {
+        if (head == null)
+            return head;
+        head = reverse(head);
+        head = addOneUtils(head);
+        head = reverse(head);
+        return head;
+    }
+
+    public Node addListUtils(Node h1, Node h2) {
+        Node head3 = new Node(0), res = head3;
+        int carry = 0, sum = 0;
+        while (h1 != null && h2 != null) {
+            sum = carry + h1.data + h2.data;
+            carry = sum >= 10 ? 1 : 0;
+            sum = sum % 10;
+            head3.next = new Node(sum);
+            head3 = head3.next;
+            h1 = h1.next;
+            h2 = h2.next;
+        }
+        while (h1 != null) {
+            sum = carry + h1.data;
+            carry = sum >= 10 ? 1 : 0;
+            sum = sum % 10;
+            head3.next = new Node(sum);
+            head3 = head3.next;
+            h1 = h1.next;
+        }
+
+        while (h2 != null) {
+            sum = carry + h2.data;
+            carry = sum >= 10 ? 1 : 0;
+            sum = sum % 10;
+            head3.next = new Node(sum);
+            head3 = head3.next;
+            h2 = h2.next;
+        }
+        if (carry > 0)
+            head3.next = new Node(carry);
+
+        return res.next;
+    }
+
+    public Node addTwoLists(Node first, Node second) {
+        if (first == null)
+            return second;
+        else if (second == null)
+            return first;
+        else {
+            first = reverse(first);
+            second = reverse(second);
+
+            Node head3 = addListUtils(first, second);
+            head3 = reverse(head3);
+            return head3;
+        }
+    }
+
+    public Node findIntersection(Node head1, Node head2) {
+        Node head3 = new Node(0), res = head3;
+        while (head1 != null && head2 != null) {
+            if (head1.data == head2.data) {
+                head3.next = new Node(head1.data);
+                head3 = head3.next;
+                head1 = head1.next;
+                head2 = head2.next;
+            } else if (head1.data > head2.data)
+                head2 = head2.next;
+            else
+                head1 = head1.next;
+        }
+        return res;
+    }
+
+    public Node getIntersectionPoint(Node head1, Node head2) {
+        if (head1 == null || head2 == null)
+            return null;
+        else {
+            HashSet<Node> set = new HashSet<>();
+            while (head1 != null) {
+                set.add(head1);
+                head1 = head1.next;
+            }
+
+            while (head2 != null) {
+                if (set.contains(head2))
+                    return head2;
+                head2 = head2.next;
+            }
+        }
+        return null;
+    }
+
+    public Node merge(Node left, Node right) {
+        if (left == null)
+            return right;
+        else if (right == null)
+            return left;
+        Node result = null;
+        if (left.data <= right.data) {
+            result = left;
+            result.next = merge(left.next, right);
+        } else if (left.data > right.data) {
+            result = right;
+            result.next = merge(left, right.next);
+        }
+        return result;
+    }
+
+    public Node mergeSort(Node head) {
+        if (head != null && head.next != null) {
+            Node mid = getMiddleElement(head);
+            if (mid != null) {
+                if (mid.next == null)
+                    return null;
+                Node nextOfMid = mid.next;
+                mid.next = null;
+                Node left = mergeSort(head);
+                Node right = mergeSort(nextOfMid);
+                Node sortedList = merge(left, right);
+                return sortedList;
+            }
+        }
+        return null;
+    }
+
+    public void display(Node head) {
         if (head == null)
             System.out.println("\nLinked List is empty!");
         else {
-            Node<T> temp = head;
+            Node temp = head;
             while (temp != null) {
                 System.out.print(temp.data + "->");
                 temp = temp.next;
@@ -399,8 +559,8 @@ public class SingleLinkedList {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
-        LinkedList<Integer> list = new LinkedList<>();
-        Node<Integer> head = null;
+        LinkedList list = new LinkedList();
+        Node head = null;
 
         int choice = 1, a = 1;
         while (choice != 5) {
@@ -449,7 +609,8 @@ public class SingleLinkedList {
                 case 4:
                     System.out.println("\n1. Middle Element\n2. Binary Search\n3. Check Loop\n4. Remove Loop"
                             + "\n5. Reverse" + "  \n6. Remove Duplicates\n7. Move Last to Front"
-                            + "\n8. Reorder List (LeetCode)\n9. Get Number\n");
+                            + "\n8. Reorder List (LeetCode)\n9. Get Number\n10. Add One\n11. Intersection"
+                            + "\n12. Add two linked list numerically\n13. Intersection Point" + "\n14. Merge Sort\n");
                     a = in.nextInt();
                     if (a == 1)
                         System.out.println("\nMiddle Element = " + list.getMiddleElement(head));
@@ -466,6 +627,39 @@ public class SingleLinkedList {
                         head = list.reverseGroup(head, 3);
                     else if (a == 6)
                         head = list.removeDuplicatesSortedRec(head);
+                    else if (a == 7)
+                        head = list.moveLastToFront(head);
+                    else if (a == 8)
+                        head = list.reorder(head);
+                    else if (a == 9)
+                        System.out.println("\nNumber = " + list.getNumber(head));
+                    else if (a == 10)
+                        head = list.addOne(head);
+                    else if (a == 11) {
+                        Node head2 = null;
+                        head2 = list.insertAtEnd(head2, 12);
+                        Node head3 = list.findIntersection(head, head2);
+                        list.display(head3.next);
+                    } else if (a == 12) {
+                        Node head2 = null;
+                        head2 = list.insertAtEnd(head2, 3);
+                        head2 = list.insertAtEnd(head2, 4);
+                        head2 = list.insertAtEnd(head2, 5);
+                        Node head3 = list.addTwoLists(head, head2);
+                        list.display(head3);
+                    } else if (a == 13) {
+                        Node head2 = null;
+                        head2 = list.insertAtEnd(head2, 10);
+                        head2 = list.insertAtEnd(head2, 15);
+                        head2 = list.insertAtEnd(head2, 30);
+
+                        head.next.next.next = head2.next;
+                        System.out.println("LHS = " + head.next.next.next);
+                        System.out.println("RHS = " + head2.next);
+                        Node inter = list.getIntersectionPoint(head, head2);
+                        System.out.println("Intersection Point = " + inter.data);
+                    } else if (a == 14)
+                        list.mergeSort(head);
                     break;
 
                 case 5:
