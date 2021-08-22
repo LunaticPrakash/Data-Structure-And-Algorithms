@@ -227,23 +227,19 @@ class LinkedList {
     public Node removeLoop(Node head) {
         if (head == null || head.next == null)
             return head;
-        Node slow = head.next;
-        Node fast = head.next.next;
-
+        Node slow = head.next, fast = head.next.next;
         while (fast != null && fast.next != null) {
             if (slow == fast)
                 break;
             slow = slow.next;
             fast = fast.next.next;
         }
-
         if (slow == head) {
-            while (slow.next != slow)
-                slow = slow.next;
-            slow.next = null;
-        }
-
-        else if (slow == fast) {
+            while (fast.next != head)
+                fast = fast.next;
+            fast.next = null;
+        } else if (slow == fast) {
+            slow = head;
             while (slow.next != fast.next) {
                 slow = slow.next;
                 fast = fast.next;
@@ -511,7 +507,7 @@ class LinkedList {
     public Node merge(Node left, Node right) {
         if (left == null)
             return right;
-        else if (right == null)
+        if (right == null)
             return left;
         Node result = null;
         if (left.data <= right.data) {
@@ -521,6 +517,7 @@ class LinkedList {
             result = right;
             result.next = merge(left, right.next);
         }
+        result.next = null;
         return result;
     }
 
@@ -528,8 +525,6 @@ class LinkedList {
         if (head != null && head.next != null) {
             Node mid = getMiddleElement(head);
             if (mid != null) {
-                if (mid.next == null)
-                    return null;
                 Node nextOfMid = mid.next;
                 mid.next = null;
                 Node left = mergeSort(head);
@@ -538,7 +533,36 @@ class LinkedList {
                 return sortedList;
             }
         }
-        return null;
+        return head;
+    }
+
+    public boolean isPalindrome(Node head) {
+        if (head == null)
+            return true;
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast)
+                break;
+        }
+
+        Node pre = null, curr = slow, nex = null;
+        while (curr != null) {
+            nex = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = nex;
+        }
+        fast = head;
+        while (fast != null && pre != null) {
+            if (fast.data != pre.data)
+                return false;
+            fast = fast.next;
+            pre = pre.next;
+        }
+        return true;
     }
 
     public void display(Node head) {
@@ -610,7 +634,8 @@ public class SingleLinkedList {
                     System.out.println("\n1. Middle Element\n2. Binary Search\n3. Check Loop\n4. Remove Loop"
                             + "\n5. Reverse" + "  \n6. Remove Duplicates\n7. Move Last to Front"
                             + "\n8. Reorder List (LeetCode)\n9. Get Number\n10. Add One\n11. Intersection"
-                            + "\n12. Add two linked list numerically\n13. Intersection Point" + "\n14. Merge Sort\n");
+                            + "\n12. Add two linked list numerically\n13. Intersection Point" + "\n14. Merge Sort"
+                            + "\n15. Check Palindrome\n");
                     a = in.nextInt();
                     if (a == 1)
                         System.out.println("\nMiddle Element = " + list.getMiddleElement(head));
@@ -660,6 +685,9 @@ public class SingleLinkedList {
                         System.out.println("Intersection Point = " + inter.data);
                     } else if (a == 14)
                         list.mergeSort(head);
+
+                    else if (a == 15)
+                        System.out.println("\nPalindrome = " + list.isPalindrome(head));
                     break;
 
                 case 5:
