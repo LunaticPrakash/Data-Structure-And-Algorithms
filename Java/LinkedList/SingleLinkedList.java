@@ -21,7 +21,6 @@ class LinkedList {
             newNode.next = head;
             head = newNode;
         }
-        System.out.println("Mid = " + String.valueOf(head.data));
         return head;
     }
 
@@ -644,6 +643,7 @@ public class SingleLinkedList {
                         int key = in.nextInt();
                         System.out.println("\nFound at index = " + list.binarySearch(head, null, key));
                     } else if (a == 3) {
+                        head.next.next = head;
                         System.out.println("\nLoop Exist = " + list.checkLoop(head));
                         System.out.println("\nLength of Loop = " + list.lengthLoop(head));
                     } else if (a == 4)
