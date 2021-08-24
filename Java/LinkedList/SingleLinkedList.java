@@ -620,6 +620,7 @@ class LinkedList {
     public Node delNthNodeEnd2(Node head, int n) {
         Node p1 = head;
         Node p2 = head;
+        int count = 0;
         while (p1 != null && count < n + 1) {
             p1 = p1.next;
             count++;
@@ -629,6 +630,10 @@ class LinkedList {
             head = head.next;
             return head;
         }
+
+        if (p1 == null && count != n)
+            return head;
+
         while (p1 != null) {
             p1 = p1.next;
             p2 = p2.next;
