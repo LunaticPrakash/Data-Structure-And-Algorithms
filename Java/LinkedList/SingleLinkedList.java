@@ -468,27 +468,27 @@ class LinkedList {
         }
     }
 
-    public Node multiplyListsUtil(Node h1, Node h2) {
-        Node h3 = null, res = h3;
-        int prod = 1, carry = 0;
-        while (h1 != null && h2 != null) {
-            prod = carry + h1.data * h2.data;
-            carry = prod - (prod/10)*10;
-            h3.data = prod%10;
-        }
-    }
+    // public Node multiplyListsUtil(Node h1, Node h2) {
+    // Node h3 = null, res = h3;
+    // int prod = 1, carry = 0;
+    // while (h1 != null && h2 != null) {
+    // prod = carry + h1.data * h2.data;
+    // carry = prod - (prod / 10) * 10;
+    // h3.data = prod % 10;
+    // }
+    // }
 
-    public Node multiplyLists(Node h1, Node h2) {
-        if (h1 == null)
-            return h2;
-        if (h2 == null)
-            return h1;
-        h1 = reverse(h1);
-        h2 = reverse(h2);
+    // public Node multiplyLists(Node h1, Node h2) {
+    // if (h1 == null)
+    // return h2;
+    // if (h2 == null)
+    // return h1;
+    // h1 = reverse(h1);
+    // h2 = reverse(h2);
 
-        Node h3 = multiplyListsUtil(h1, h2);
-        h3 = reverse(h3);
-    }
+    // Node h3 = multiplyListsUtil(h1, h2);
+    // h3 = reverse(h3);
+    // }
 
     public Node findIntersection(Node head1, Node head2) {
         Node head3 = new Node(0), res = head3;
@@ -586,6 +586,79 @@ class LinkedList {
         return true;
     }
 
+    int count = 0;
+
+    public void nthNodeEnd(Node head, int n) {
+        if (head == null)
+            return;
+        nthNodeEnd(head.next, n);
+        if (++count == n) {
+            System.out.println("Nth Node from end = " + head.data);
+        }
+    }
+
+    public Node nthNodeEnd2(Node head, int n) {
+        Node p1 = head, p2 = head;
+        int count = 0;
+
+        while (p1 != null && count < n) {
+            p1 = p1.next;
+            count++;
+        }
+        if (p1 == null && count == n)
+            return head;
+        if (p1 == null && count != n)
+            return null;
+        while (p1 != null) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        System.out.println(p2.data);
+        return p2;
+    }
+
+    public Node delNthNodeEnd2(Node head, int n) {
+        Node p1 = head;
+        Node p2 = head;
+        while (p1 != null && count < n + 1) {
+            p1 = p1.next;
+            count++;
+        }
+
+        if (p1 == null && count == n) {
+            head = head.next;
+            return head;
+        }
+        while (p1 != null) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        if (p2 != null && p2.next != null) {
+            Node delNode = p2.next;
+            if (delNode != null)
+                p2.next = delNode.next;
+        }
+        return head;
+    }
+
+    public Node removeAllOccuDupl(Node head) {
+        Node pre = new Node(0);
+        pre.next = head;
+        Node curr = head;
+        while (curr != null) {
+            while (curr.next != null && pre.next.data == curr.next.data)
+                curr = curr.next;
+            if (pre.next == curr)
+                pre = pre.next;
+            else
+                pre.next = curr.next;
+            curr = curr.next;
+        }
+        head = pre.next;
+        return head;
+    }
+
     public void display(Node head) {
         if (head == null)
             System.out.println("\nLinked List is empty!");
@@ -656,7 +729,8 @@ public class SingleLinkedList {
                             + "\n5. Reverse" + "  \n6. Remove Duplicates\n7. Move Last to Front"
                             + "\n8. Reorder List (LeetCode)\n9. Get Number\n10. Add One\n11. Intersection"
                             + "\n12. Add two linked list numerically\n13. Intersection Point" + "\n14. Merge Sort"
-                            + "\n15. Check Palindrome\n");
+                            + "\n15. Check Palindrome\n16. Nth Node from end\n17. Delete Nth Node from End"
+                            + "\n18. Remove all occurrence of Duplicates\n");
                     a = in.nextInt();
                     if (a == 1)
                         System.out.println("\nMiddle Element = " + list.getMiddleElement(head));
@@ -707,9 +781,19 @@ public class SingleLinkedList {
                         System.out.println("Intersection Point = " + inter.data);
                     } else if (a == 14)
                         list.mergeSort(head);
-
                     else if (a == 15)
                         System.out.println("\nPalindrome = " + list.isPalindrome(head));
+                    else if (a == 16) {
+                        System.out.print("Enter n :- ");
+                        int n = in.nextInt();
+                        System.out.println("Nth Node from end = " + list.nthNodeEnd2(head, n));
+                    } else if (a == 17) {
+                        System.out.print("Enter n :- ");
+                        int n = in.nextInt();
+                        head = list.delNthNodeEnd2(head, n);
+                        list.display(head);
+                    } else if (a == 18)
+                        head = list.removeAllOccuDupl(head);
                     break;
 
                 case 5:
