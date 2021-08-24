@@ -175,7 +175,7 @@ class LinkedList {
             if (slow == fast)
                 return true;
             slow = slow.next;
-            fast = fast.next;
+            fast = fast.next.next;
         }
         return false;
     }
@@ -196,7 +196,7 @@ class LinkedList {
                 return slow;
             }
             slow = slow.next;
-            fast = fast.next;
+            fast = fast.next.next;
         }
         return null;
     }
@@ -348,7 +348,7 @@ class LinkedList {
     // L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 ->
     public Node alternateMerge(Node head1, Node head2) {
         Node head = head1;
-        while (head1.next != null && head2.next != null) {
+        while (head1 != null && head2 != null) {
             Node temp = head1.next;
             head1.next = head2;
             head1 = temp;
@@ -466,6 +466,28 @@ class LinkedList {
             head3 = reverse(head3);
             return head3;
         }
+    }
+
+    public Node multiplyListsUtil(Node h1, Node h2) {
+        Node h3 = null, res = h3;
+        int prod = 1, carry = 0;
+        while (h1 != null && h2 != null) {
+            prod = carry + h1.data * h2.data;
+            carry = prod - (prod/10)*10;
+            h3.data = prod%10;
+        }
+    }
+
+    public Node multiplyLists(Node h1, Node h2) {
+        if (h1 == null)
+            return h2;
+        if (h2 == null)
+            return h1;
+        h1 = reverse(h1);
+        h2 = reverse(h2);
+
+        Node h3 = multiplyListsUtil(h1, h2);
+        h3 = reverse(h3);
     }
 
     public Node findIntersection(Node head1, Node head2) {
@@ -668,9 +690,9 @@ public class SingleLinkedList {
                     } else if (a == 12) {
                         Node head2 = null;
                         head2 = list.insertAtEnd(head2, 3);
-                        head2 = list.insertAtEnd(head2, 4);
                         head2 = list.insertAtEnd(head2, 5);
-                        Node head3 = list.addTwoLists(head, head2);
+                        head2 = list.insertAtEnd(head2, 7);
+                        Node head3 = list.alternateMerge(head, head2);
                         list.display(head3);
                     } else if (a == 13) {
                         Node head2 = null;
