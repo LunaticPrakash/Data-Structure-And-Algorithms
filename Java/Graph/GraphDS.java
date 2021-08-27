@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -172,6 +173,42 @@ class Graph {
         }
         return dm;
     }
+
+    public int getIndexMin(int[] dist, int[] vis) {
+        int min = Integer.MAX_VALUE, minIdx = 0;
+        for (int i = 0; i < dist.length; i++) {
+            if (vis[i] == 0 && dist[i] <= min) {
+                min = dist[i];
+                minIdx = i;
+            }
+        }
+        return minIdx;
+    }
+
+    public int[] dijkstra(int[][] cm, int src) {
+        int n = cm.length;
+        int[] distance = new int[n];
+        int[] visited = new int[n];
+
+        for (int i = 0; i < n; i++)
+            distance[i] = cm[src][i];
+        distance[src] = 0;
+
+        for (int i = 0; i < n; i++)
+            visited[i] = 0;
+        visited[src] = 1;
+        while (Arrays.stream(visited).sum() != n) {
+            int w = getIndexMin(distance, visited);
+            visited[w] = 1;
+            for (int v = 0; v < n; v++) {
+                if (visited[v] == 0 && distance[w] != Integer.MAX_VALUE && cm[w][v] != Integer.MAX_VALUE
+                        && distance[v] > (distance[w] + cm[w][v])) {
+                    distance[v] = distance[w] + cm[w][v];
+                }
+            }
+        }
+        return distance;
+    }
 }
 
 public class GraphDS {
@@ -212,7 +249,7 @@ public class GraphDS {
 
                 case 4:
                     System.out.println("\n1. Find Path\n2. Find all path\n3. DFS\n4. BFS\n5. Adj List to Matrix"
-                            + "\n6. Warshall Algorithm\n7. Floyd Warshall Algorithm\n");
+                            + "\n6. Warshall Algorithm\n7. Floyd Warshall Algorithm\n8. Dijkstra Algorithm\n");
                     a = in.nextInt();
                     if (a == 1) {
                         System.out.print("\nEnter source and destination vertex : ");
@@ -276,10 +313,26 @@ public class GraphDS {
                                 System.out.print(dm[i][j] + "  ");
                             System.out.println();
                         }
+                    } else if (a == 8) {
+                        System.out.print("\nEnter number of vertices : ");
+                        int n = in.nextInt();
+                        int[][] cm = new int[n][n];
+                        System.out.println("\nEnter the cost matrix (use -99 for infinity) :- ");
+                        for (int i = 0; i < n; i++) {
+                            for (int j = 0; j < n; j++) {
+                                cm[i][j] = in.nextInt();
+                                if (cm[i][j] == -99) {
+                                    cm[i][j] = Integer.MAX_VALUE;
+                                }
+                            }
+                        }
+                        System.out.print("\nEnter source vertex : ");
+                        src = in.nextInt();
+                        int[] dist = graph.dijkstra(cm, src);
+                        for (int i = 0; i < dist.length; i++)
+                            System.out.print(dist[i] + " ");
                     }
-
                     break;
-
                 case 5:
                     return;
 
