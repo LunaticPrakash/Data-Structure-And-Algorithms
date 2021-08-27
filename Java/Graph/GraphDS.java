@@ -152,6 +152,26 @@ class Graph {
         }
         return TC;
     }
+
+    public int[][] floydWarshallAlgo(int[][] cm) {
+        int n = cm.length;
+        int[][] dm = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++)
+                dm[i][j] = cm[i][j];
+        }
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    // dm[i][j] = Math.min(dm[i][j], (dm[i][k] + dm[k][j]));
+                    if (dm[i][k] != Integer.MAX_VALUE && dm[k][j] != Integer.MAX_VALUE
+                            && dm[i][j] > (dm[i][k] + dm[k][j]))
+                        dm[i][j] = dm[i][k] + dm[k][j];
+                }
+            }
+        }
+        return dm;
+    }
 }
 
 public class GraphDS {
@@ -192,7 +212,7 @@ public class GraphDS {
 
                 case 4:
                     System.out.println("\n1. Find Path\n2. Find all path\n3. DFS\n4. BFS\n5. Adj List to Matrix"
-                            + "\n6. Warshall Algorithm\n");
+                            + "\n6. Warshall Algorithm\n7. Floyd Warshall Algorithm\n");
                     a = in.nextInt();
                     if (a == 1) {
                         System.out.print("\nEnter source and destination vertex : ");
@@ -237,7 +257,27 @@ public class GraphDS {
                                 System.out.print(TC[i][j] + "  ");
                             System.out.println();
                         }
+                    } else if (a == 7) {
+                        System.out.print("\nEnter number of vertices : ");
+                        int n = in.nextInt();
+                        int[][] cm = new int[n][n];
+                        System.out.println("\nEnter the cost matrix (use -99 for infinity) :- ");
+                        for (int i = 0; i < n; i++) {
+                            for (int j = 0; j < n; j++) {
+                                cm[i][j] = in.nextInt();
+                                if (cm[i][j] == -99) {
+                                    cm[i][j] = Integer.MAX_VALUE;
+                                }
+                            }
+                        }
+                        int[][] dm = graph.floydWarshallAlgo(cm);
+                        for (int i = 0; i < dm.length; i++) {
+                            for (int j = 0; j < dm.length; j++)
+                                System.out.print(dm[i][j] + "  ");
+                            System.out.println();
+                        }
                     }
+
                     break;
 
                 case 5:
