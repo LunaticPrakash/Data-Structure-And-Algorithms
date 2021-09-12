@@ -648,9 +648,9 @@ class LinkedList {
     }
 
     public Node removeAllOccuDupl(Node head) {
-        Node pre = new Node(0);
-        pre.next = head;
         Node curr = head;
+        Node pre = new Node(0);
+        pre.next = curr;
         while (curr != null) {
             while (curr.next != null && pre.next.data == curr.next.data)
                 curr = curr.next;
