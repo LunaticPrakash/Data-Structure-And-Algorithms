@@ -1,13 +1,11 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _9_Rotate_Array_By_One {
-    
-    public void rotateByOne(int arr[], int n){
-        int temp = arr[n-1];
-        for(int i=n-2;i>=0;i--){
-            arr[i+1] = arr[i];
+
+    public void rotateByOne(int arr[], int n) {
+        int temp = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            arr[i + 1] = arr[i];
         }
         arr[0] = temp;
     }
@@ -27,7 +25,8 @@ public class _9_Rotate_Array_By_One {
         _9_Rotate_Array_By_One obj = new _9_Rotate_Array_By_One();
         obj.rotateByOne(arr, n);
 
-        for(int i : arr)
+        for (int i : arr)
             System.out.print(i + " ");
+        scan.close();
     }
 }

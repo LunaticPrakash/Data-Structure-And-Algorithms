@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _18_Best_Time_To_Buy_Sell {
@@ -29,7 +27,7 @@ public class _18_Best_Time_To_Buy_Sell {
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.valueOf(numbers[i]);
         }
-
+        scan.close();
         _18_Best_Time_To_Buy_Sell obj = new _18_Best_Time_To_Buy_Sell();
         long result = obj.getMaxProfit(arr);
         System.out.println("Max Profit = " + result);

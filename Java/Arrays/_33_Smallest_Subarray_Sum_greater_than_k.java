@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _33_Smallest_Subarray_Sum_greater_than_k {
@@ -37,7 +35,7 @@ public class _33_Smallest_Subarray_Sum_greater_than_k {
         }
         System.out.print("Enter value of k : ");
         int k = scan.nextInt();
-
+        scan.close();
         System.out.println(getSubarray(arr, k));
     }
 }

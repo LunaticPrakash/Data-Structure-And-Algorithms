@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _10_Largest_Sum_Contiguous_Array {
@@ -12,9 +10,9 @@ public class _10_Largest_Sum_Contiguous_Array {
             currSum = arr[i];
             for (int j = i + 1; j < n; j++) {
                 // if (currSum > maxSum && currSum > currSum + arr[j])
-                //     maxSum = currSum;
+                // maxSum = currSum;
                 // else if (currSum + arr[j] > maxSum)
-                //     maxSum = currSum + arr[j];
+                // maxSum = currSum + arr[j];
                 maxSum = Math.max(maxSum, Math.max(currSum, currSum + arr[j]));
                 currSum += arr[j];
             }
@@ -56,5 +54,6 @@ public class _10_Largest_Sum_Contiguous_Array {
         _10_Largest_Sum_Contiguous_Array obj = new _10_Largest_Sum_Contiguous_Array();
         int result = obj.largestSum1(arr, n);
         System.out.println("Max sum = " + result);
+        scan.close();
     }
 }

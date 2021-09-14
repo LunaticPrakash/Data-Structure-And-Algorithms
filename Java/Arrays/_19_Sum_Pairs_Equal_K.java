@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -70,7 +68,7 @@ public class _19_Sum_Pairs_Equal_K {
 
         _19_Sum_Pairs_Equal_K obj = new _19_Sum_Pairs_Equal_K();
         obj.getPairs3(arr, k);
-
+        scan.close();
     }
 
 }

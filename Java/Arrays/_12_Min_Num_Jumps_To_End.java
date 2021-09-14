@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _12_Min_Num_Jumps_To_End {
@@ -59,5 +57,6 @@ public class _12_Min_Num_Jumps_To_End {
         _12_Min_Num_Jumps_To_End obj = new _12_Min_Num_Jumps_To_End();
         int result = obj.getMinJumps1(arr, n);
         System.out.println("Jumps = " + result);
+        scan.close();
     }
 }

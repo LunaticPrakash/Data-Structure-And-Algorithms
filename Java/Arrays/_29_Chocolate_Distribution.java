@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -7,12 +5,12 @@ import java.util.Scanner;
 public class _29_Chocolate_Distribution {
 
     private static long minDiff(ArrayList<Long> a, long n, long m) {
-        long min = Long.MIN_VALUE;
+        long min = Long.MAX_VALUE;
         Collections.sort(a);
         for (int i = 0; i < n - m + 1; i++) {
             int idx = (int) (i + m - 1);
             long d = a.get(idx) - a.get(i);
-            if(d < min)
+            if (d < min)
                 min = d;
         }
         return min;
@@ -31,7 +29,7 @@ public class _29_Chocolate_Distribution {
         ArrayList<Long> a = new ArrayList<>();
         for (int i = 0; i < n; i++)
             a.add(Long.valueOf(numbers[i]));
-
+        scan.close();
         minDiff(a, n, m);
     }
 }

@@ -1,14 +1,6 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _28_Trapping_Rain_Water_Problem {
-
-    private static void display(int[] arr) {
-        System.out.println();
-        for (int e : arr)
-            System.out.print(e + " ");
-    }
 
     private static int getWater(int[] arr, int n) {
         int sum = 0;
@@ -78,6 +70,7 @@ public class _28_Trapping_Rain_Water_Problem {
         scan.nextLine();
         System.out.print("Enter your array elements :- ");
         String numbers[] = scan.nextLine().split(" ");
+        scan.close();
         int arr[] = new int[n];
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.valueOf(numbers[i]);

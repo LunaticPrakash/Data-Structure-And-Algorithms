@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -55,7 +53,7 @@ public class _32_Triplet_Sum_Equals_k {
         }
         System.out.print("Enter value of k : ");
         int k = scan.nextInt();
-
+        scan.close();
         System.out.println(getTriplet2(arr, k));
     }
 }

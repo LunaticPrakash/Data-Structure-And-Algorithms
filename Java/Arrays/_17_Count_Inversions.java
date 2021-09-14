@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _17_Count_Inversions {
@@ -31,5 +29,6 @@ public class _17_Count_Inversions {
         _17_Count_Inversions obj = new _17_Count_Inversions();
         long result = obj.getInversion(arr);
         System.out.println("\nInversion Count = " + result);
+        scan.close();
     }
 }

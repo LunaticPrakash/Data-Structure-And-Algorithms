@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +37,7 @@ public class _25_Elements_More_Than_N_by_K {
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.valueOf(numbers[i]);
         }
+        scan.close();
         _25_Elements_More_Than_N_by_K obj = new _25_Elements_More_Than_N_by_K();
         obj.majorityElement(arr);
     }

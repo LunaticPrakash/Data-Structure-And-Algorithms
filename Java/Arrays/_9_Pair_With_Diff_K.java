@@ -1,8 +1,5 @@
-package Search_And_Sort;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 class Pair {
@@ -72,5 +69,6 @@ public class _9_Pair_With_Diff_K {
             arr[i] = Integer.parseInt(line[i]);
 
         System.out.println(getPair2(arr, n, k));
+        scan.close();
     }
 }

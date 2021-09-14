@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _16_Next_Permutation {
@@ -75,5 +73,6 @@ public class _16_Next_Permutation {
 
         _16_Next_Permutation obj = new _16_Next_Permutation();
         obj.getNextPerm(arr);
+        scan.close();
     }
 }

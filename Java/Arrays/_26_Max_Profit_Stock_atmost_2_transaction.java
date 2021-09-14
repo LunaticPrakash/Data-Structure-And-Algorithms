@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _26_Max_Profit_Stock_atmost_2_transaction {
@@ -34,6 +32,7 @@ public class _26_Max_Profit_Stock_atmost_2_transaction {
         scan.nextLine();
         System.out.print("Enter your array elements :- ");
         String numbers[] = scan.nextLine().split(" ");
+        scan.close();
         int arr[] = new int[n];
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.valueOf(numbers[i]);

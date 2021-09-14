@@ -1,4 +1,4 @@
-package Arrays;
+
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -60,9 +60,9 @@ public class _7_Intersection_Of_two_Arrays {
         scan.close();
 
         _7_Intersection_Of_two_Arrays obj = new _7_Intersection_Of_two_Arrays();
-        ArrayList<Integer> intersec = obj.intersectionOfArray(arr1, n1, arr2, n2);
         obj.intersectionOfArray2(arr1, n1, arr2, n2);
-
+        
+        // ArrayList<Integer> intersec = obj.intersectionOfArray(arr1, n1, arr2, n2);
         // System.out.print("\nIntersection :- ");
         // for (int i = 0; i < intersec.size(); i++) {
         //     System.out.print(intersec.get(i) + " ");

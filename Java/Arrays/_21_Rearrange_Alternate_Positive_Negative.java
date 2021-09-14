@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _21_Rearrange_Alternate_Positive_Negative {

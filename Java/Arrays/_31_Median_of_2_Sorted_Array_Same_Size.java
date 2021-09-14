@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Scanner;
 
 public class _31_Median_of_2_Sorted_Array_Same_Size {

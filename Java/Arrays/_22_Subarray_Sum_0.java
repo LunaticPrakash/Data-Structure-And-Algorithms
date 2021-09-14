@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -36,6 +34,7 @@ public class _22_Subarray_Sum_0 {
             System.out.println("YES");
         else
             System.out.println("NO");
+        scan.close();
     }
 
 }

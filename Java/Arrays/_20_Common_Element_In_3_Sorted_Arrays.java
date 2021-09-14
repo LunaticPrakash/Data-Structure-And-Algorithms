@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.*;
 
 public class _20_Common_Element_In_3_Sorted_Arrays {

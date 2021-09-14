@@ -1,5 +1,3 @@
-package Search_And_Sort;
-
 import java.util.Scanner;
 
 public class _8_Search_Array_Diff_k {
@@ -32,5 +30,6 @@ public class _8_Search_Array_Diff_k {
         for (int i = 0; i < line.length; i++)
             arr[i] = Integer.parseInt(line[i]);
         System.out.println("Index = " + find(arr, diff, key));
+        scan.close();
     }
 }

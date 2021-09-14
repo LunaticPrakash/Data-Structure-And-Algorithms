@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -60,6 +58,7 @@ public class _15_Merge_Intervals {
         int result[][] = obj.mergeIntervals(intervals);
         for (int i = 0; i < result.length; i++)
             System.out.print("[" + result[i][0] + " " + result[i][1] + "] ");
+        scan.close();
     }
 
 }

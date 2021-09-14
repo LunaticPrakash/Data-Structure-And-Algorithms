@@ -1,5 +1,3 @@
-package Arrays;
-
 public class containerWithMostWater {
 
     public static int solve1(int[] heights) {

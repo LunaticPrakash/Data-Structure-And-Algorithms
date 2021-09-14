@@ -1,5 +1,3 @@
-package Arrays;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -31,7 +29,7 @@ public class _30_Find_the_Median {
         String line[] = scan.nextLine().split("\\s+");
         for (int i = 0; i < line.length; i++)
             arr[i] = Integer.parseInt(line[i]);
-
+        scan.close();
         System.out.println("Median = " + getMedian(arr, n));
     }
 }
