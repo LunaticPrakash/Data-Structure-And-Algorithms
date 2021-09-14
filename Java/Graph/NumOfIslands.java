@@ -1,5 +1,3 @@
-package Graph;
-
 public class NumOfIslands {
 
     public static void dfs(int i, int j, int[][] visited, char[][] grid, int row, int col) {
