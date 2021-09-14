@@ -3,12 +3,11 @@ package Strings;
 public class lcp {
 
     public static String lcpUtil(String s1, String s2) {
-        int i = 0, j = 0;
-        while (i < s1.length() && j < s2.length()) {
+        int i = 0;
+        while (i < s1.length() && i < s2.length()) {
             if (s1.charAt(i) != s2.charAt(i))
                 break;
             i++;
-            j++;
         }
         return s1.substring(0, i);
     }
