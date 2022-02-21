@@ -106,9 +106,7 @@ public class subArraySum {
 
     public static void main(String[] args) {
         int[] arr = { 10, 2, 3, 7, 5, 1, 2, 1, 3 };
-        int[] arr1 = { 77, 32, 9, 45, 40, 27, 24, 38, 39, 19, 83, 30, 42, 34, 16, 40 };
         int targetSum = 12;
-        HashMap<Integer, Boolean> memo = new HashMap<>();
         System.out.println("Indexes = " + subArraySumSolver3(arr, targetSum, arr.length));
     }
 }

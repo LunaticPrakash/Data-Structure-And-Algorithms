@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class howSum {
 
@@ -22,9 +21,6 @@ public class howSum {
 
     public static void main(String[] args) {
         int[] arr = { 3, 34, 4, 12, 5, 2 };
-        int[] arr1 = { 77, 32, 9, 45, 40, 27, 24, 38, 39, 19, 83, 30, 42, 34, 16, 40 };
-        int targetSum = 659;
-        HashMap<Integer, Boolean> memo = new HashMap<>();
-        System.out.println("CanSum = " + howSumSolver(arr, 30));
+        System.out.println("HowSum = " + howSumSolver(arr, 30));
     }
 }

@@ -33,8 +33,6 @@ public class canSubsetSum {
 
     public static void main(String[] args) {
         int[] arr = { 3, 34, 4, 12, 5, 2 };
-        int[] arr1 = { 77, 32, 9, 45, 40, 27, 24, 38, 39, 19, 83, 30, 42, 34, 16, 40 };
-        int targetSum = 659;
         int n = arr.length;
         HashMap<Integer, Boolean> memo = new HashMap<>();
         System.out.println("CanSubsetSum = " + canSubsetSumSolver(arr, n, 9, memo));

@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class mergesort {
 
     public static void merge(int[] arr, int l, int mid, int r) {
