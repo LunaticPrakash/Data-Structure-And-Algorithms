@@ -1,6 +1,3 @@
-from audioop import mul
-
-
 def dec2Bin(n):
     res = ""
     while n:
