@@ -15,7 +15,7 @@ public class _2PascalTriangle {
                 } else {
                     row.add(pre.get(j - 1) + pre.get(j));
                 }
-            }
+            } 
             pre = row;
             res.add(row);
         }
