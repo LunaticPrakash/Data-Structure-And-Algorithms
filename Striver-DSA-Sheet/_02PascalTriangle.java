@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class _2PascalTriangle {
+public class _02PascalTriangle {
 
     // Time: O(N2) Space: O(N2)
     public static List<List<Integer>> generate(int numRows) {

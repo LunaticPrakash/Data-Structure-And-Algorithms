@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class _8MergeIntervals {
+public class _08MergeIntervals {
 
     // Time: O(NLogN + N) Space: O(N)
     public static int[][] merge(int[][] intervals) {

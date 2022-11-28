@@ -1,4 +1,4 @@
-public class _6StockBuySell {
+public class _06StockBuySell {
 
     // Approach - 1 Time: O(N2) Space: O(1)
     public static int maxProfit1(int[] prices) {

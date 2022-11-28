@@ -1,4 +1,4 @@
-public class _3NextPermutation {
+public class _03NextPermutation {
 
     // Time: O(3N) Space: O(1)
     public static void nextPermutation(int[] nums) {

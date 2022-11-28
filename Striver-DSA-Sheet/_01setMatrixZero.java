@@ -1,4 +1,4 @@
-public class _1setMatrixZero {
+public class _01setMatrixZero {
 
     // Approach - 1 Time: O(N2) Space: O(2N)
     public static void setZeroes1(int[][] matrix) {

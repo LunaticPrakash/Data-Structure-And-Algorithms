@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class _9MergeSortedArray {
+public class _09MergeSortedArray {
     // Approach - 1 Time: O(NLogN) + O(M) + O(N) + O(N+M) Space: O(N+M)
     public static void merge1(int[] nums1, int m, int[] nums2, int n) {
         int[] res = new int[m + n];

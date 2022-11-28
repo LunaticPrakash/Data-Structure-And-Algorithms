@@ -1,4 +1,4 @@
-public class _7RotateImage {
+public class _07RotateImage {
 
     // Time: O(2N2) Space: O(1)
     public static void rotate(int[][] matrix) {

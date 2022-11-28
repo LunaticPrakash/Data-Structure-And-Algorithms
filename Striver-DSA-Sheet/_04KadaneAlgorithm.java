@@ -1,4 +1,4 @@
-public class _4KadaneAlgorithm { 
+public class _04KadaneAlgorithm { 
 
     // Approach - 1 Time: O(N3) Space: O(1)
     public static int maxSubArray1(int[] nums) {

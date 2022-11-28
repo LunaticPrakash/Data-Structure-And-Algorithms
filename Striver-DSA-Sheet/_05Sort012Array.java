@@ -1,4 +1,4 @@
-public class _5Sort012Array {
+public class _05Sort012Array {
 
     // Approach - 1 Time: O(N) Space: O(1)
     public static void sortColors(int[] nums) {
