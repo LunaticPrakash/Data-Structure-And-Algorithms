@@ -37,16 +37,16 @@ class Pair<T, U> {
     }
 }
 
-public class _108BottomViewTree {
-
+public class _109TopViewBinaryTree {
     // Approach 1 : Iterative Time: O(N) Space: O(N+N+N)
-    public List<Integer> bottomView1(TreeNode root) {
+    public List<Integer> rightView1(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
         TreeMap<Integer, Integer> map = new TreeMap<>();
         Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
 
         if (root == null)
             return ans;
+
         queue.add(new Pair<>(root, 0));
 
         while (!queue.isEmpty()) {
@@ -54,17 +54,17 @@ public class _108BottomViewTree {
             int h = queue.peek().second;
             queue.poll();
 
-            map.put(h, curr.val);
+            if (!map.containsKey(h))
+                map.put(h, curr.val);
             if (curr.left != null)
-                queue.add(new Pair<>(curr.left, h - 1));
+                queue.add(new Pair<>(curr, h - 1));
             if (curr.right != null)
-                queue.add(new Pair<>(curr.right, h + 1));
+                queue.add(new Pair<>(curr, h + 1));
         }
 
         for (Map.Entry<Integer, Integer> m : map.entrySet()) {
             ans.add(m.getValue());
         }
-
         return ans;
     }
 
