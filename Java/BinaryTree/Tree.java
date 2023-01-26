@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeMap;
 
-class Node {
-    int data;
-    Node left;
-    Node right;
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
 
-    Node(int data) {
-        this.data = data;
+    TreeNode(int val) {
+        this.val = val;
         this.left = null;
         this.right = null;
     }
@@ -19,24 +21,24 @@ class Node {
 
 class BinaryTreeDS {
 
-    // insert a node
-    public Node insert(Node root, int data) {
+    // Insert a TreeNode: Iterative - Time: O(N) Space: O(N)
+    public TreeNode insert(TreeNode root, int val) {
         if (root == null) {
-            root = new Node(data);
+            root = new TreeNode(val);
         }
 
-        Queue<Node> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
 
         while (!q.isEmpty()) {
-            Node temp = q.poll();
+            TreeNode temp = q.poll();
             if (temp.left == null) {
-                temp.left = new Node(data);
+                temp.left = new TreeNode(val);
                 break;
             } else
                 q.add(temp.left);
             if (temp.right == null) {
-                temp.right = new Node(data);
+                temp.right = new TreeNode(val);
                 break;
             } else
                 q.add(temp.right);
@@ -44,87 +46,172 @@ class BinaryTreeDS {
         return root;
     }
 
-    // inorder traversal of tree
-    public void inorder(Node root) {
+    // Inorder traversal: Recursive - Time: O(N) Space: O(N+N)
+    public List<Integer> inorder1(TreeNode root, List<Integer> ans) {
         if (root == null)
-            return;
-        inorder(root.left);
-        System.out.print(root.data + " ");
-        inorder(root.right);
+            return ans;
+        inorder1(root.left, ans);
+        ans.add(root.val);
+        inorder1(root.right, ans);
+        return ans;
     }
 
-    // preorder traversal of tree
-    public void preorder(Node root) {
-        if (root == null)
-            return;
-        System.out.print(root.data + " ");
-        preorder(root.left);
-        preorder(root.right);
+    // Inorder traversal: Iterative - Time: O(N) Space: O(N)
+    public List<Integer> inorder2(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+
+        while (true) {
+            if (curr != null) {
+                stack.add(curr);
+                curr = curr.left;
+            } else {
+                if (stack.isEmpty())
+                    break;
+                curr = stack.pop();
+                ans.add(curr.val);
+                curr = curr.right;
+            }
+        }
+        return ans;
     }
 
-    // postorder traversal of tree
-    public void postorder(Node root) {
+    // Preorder traversal: Recursive - Time: O(N) Space: O(N+N)
+    public List<Integer> preorder1(TreeNode root, List<Integer> ans) {
         if (root == null)
-            return;
-        postorder(root.left);
-        postorder(root.right);
-        System.out.print(root.data + " ");
-
+            return ans;
+        ans.add(root.val);
+        preorder1(root.left, ans);
+        preorder1(root.right, ans);
+        return ans;
     }
 
-    // sum of all nodes in tree
-    public int sum(Node root) {
+    // Preorder traversal: Iterative - Time: O(N) Space: O(N)
+    public List<Integer> preorder2(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+
+        while (true) {
+            if (curr != null) {
+                ans.add(curr.val);
+                stack.add(curr);
+                curr = curr.left;
+            } else {
+                if (stack.isEmpty())
+                    break;
+                curr = stack.pop();
+                curr = curr.right;
+            }
+        }
+        return ans;
+    }
+
+    // Postorder traversal: Recursive - Time: O(N) Space: O(N+N)
+    public List<Integer> postorder1(TreeNode root, List<Integer> ans) {
+        if (root == null)
+            return ans;
+        postorder1(root.left, ans);
+        postorder1(root.right, ans);
+        ans.add(root.val);
+        return ans;
+    }
+
+    // Postorder traversal: Iterative - Time: O(N) Space: O(N)
+    public List<Integer> postorder2(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+
+        while (true) {
+            if (curr != null) {
+                stack.add(curr);
+                curr = curr.left;
+            } else {
+                if (stack.isEmpty())
+                    break;
+                TreeNode temp = stack.peek().right;
+                if (temp == null) {
+                    temp = stack.pop();
+                    ans.add(temp.val);
+
+                    while (!stack.isEmpty() && temp == stack.peek().right) {
+                        temp = stack.pop();
+                        ans.add(temp.val);
+                    }
+                } else {
+                    curr = temp;
+                }
+            }
+        }
+        return ans;
+    }
+
+    // Sum of all TreeNodes: Recursive - Time: O(N) Space: O(N)
+    public int sum(TreeNode root) {
         if (root == null)
             return 0;
-        return root.data + sum(root.left) + sum(root.right);
+        return root.val + sum(root.left) + sum(root.right);
     }
 
-    // print all even level nodes
-    public void even(Node root, boolean isEven) {
+    // All even level TreeNodes: Recursive - Time: O(N) Space: O(N+N)
+    public List<Integer> even(TreeNode root) {
+        return evenHelper(root, true, new ArrayList<>());
+    }
+
+    public List<Integer> evenHelper(TreeNode root, boolean isEven, List<Integer> ans) {
         if (root == null)
-            return;
+            return ans;
         if (isEven == true)
-            System.out.print(root.data + " ");
-        even(root.left, !isEven);
-        even(root.right, !isEven);
+            ans.add(root.val);
+        evenHelper(root.left, !isEven, ans);
+        evenHelper(root.right, !isEven, ans);
+        return ans;
     }
 
-    // print all odd level nodes
-    public void odd(Node root, boolean isOdd) {
+    // All odd level TreeNodes: Recursive - Time: O(N) Space: O(N+N)
+    public List<Integer> odd(TreeNode root) {
+        return oddHelper(root, false, new ArrayList<>());
+    }
+
+    public List<Integer> oddHelper(TreeNode root, boolean isOdd, List<Integer> ans) {
         if (root == null)
-            return;
+            return ans;
         if (isOdd == true)
-            System.out.print(root.data + " ");
-        even(root.left, !isOdd);
-        even(root.right, !isOdd);
+            ans.add(root.val);
+        oddHelper(root.left, !isOdd, ans);
+        oddHelper(root.right, !isOdd, ans);
+        return ans;
     }
 
-    // Get difference of values at Even & Odd level
-    public int getDiffEvenOdd(Node root) {
+    // Get difference of values at Even & Odd level: Recursive - Time: O(N) Space:
+    // O(N)
+    public int getDiffEvenOdd(TreeNode root) {
         if (root == null)
             return 0;
-        return root.data - getDiffEvenOdd(root.left) - getDiffEvenOdd(root.right);
+        return root.val - getDiffEvenOdd(root.left) - getDiffEvenOdd(root.right);
     }
 
-    // Number of nodes in tree
-    public int countNodes(Node root) {
+    // Number of TreeNodes in tree: Recursive - Time: O(N) Space: O(N)
+    public int countTreeNodes(TreeNode root) {
         if (root == null)
             return 0;
-        return 1 + countNodes(root.left) + countNodes(root.right);
+        return 1 + countTreeNodes(root.left) + countTreeNodes(root.right);
     }
 
-    // Number of leaf nodes in tree
-    public int countLeafNodes(Node root) {
+    // Number of leaf TreeNodes in tree: Recursive - Time: O(N) Space: O(N)
+    public int countLeafTreeNodes(TreeNode root) {
         if (root == null)
             return 0;
         if (root.left != null || root.right != null)
-            return countLeafNodes(root.left) + countLeafNodes(root.right);
+            return countLeafTreeNodes(root.left) + countLeafTreeNodes(root.right);
         else
             return 1;
     }
 
-    // Get height of tree
-    public int height(Node root) {
+    // Get height of tree: Recursive - Time: O(N) Space: O(N)
+    public int height(TreeNode root) {
         if (root == null)
             return 0;
         int lheight = height(root.left);
@@ -134,10 +221,10 @@ class BinaryTreeDS {
         return rheight + 1;
     }
 
-    // print kth level iterative
-    public ArrayList<Integer> kthLevelIter(Node root, int level) {
+    // TreeNodes at kth level: Iterative - Time: O(N) Space: O(N)
+    public ArrayList<Integer> kthLevelIter(TreeNode root, int level) {
         ArrayList<Integer> ans = new ArrayList<>();
-        Queue<Node> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         int k = 0, flag = 0;
         if (root == null || level < 0)
             return ans;
@@ -145,10 +232,10 @@ class BinaryTreeDS {
         while (!queue.isEmpty()) {
             int n = queue.size();
             for (int i = 0; i < n; i++) {
-                Node temp = queue.poll();
+                TreeNode temp = queue.poll();
                 if (k == level) {
                     flag = 1;
-                    ans.add(temp.data);
+                    ans.add(temp.val);
                 } else {
                     if (temp.left != null)
                         queue.add(temp.left);
@@ -163,48 +250,82 @@ class BinaryTreeDS {
         return ans;
     }
 
-    // print nodes at kth level
-    public void kthLevel(Node root, int level) {
-        if (root == null || level < 0)
-            return;
-        if (level == 0)
-            System.out.print(root.data + " ");
-        level--;
-        kthLevel(root.left, level);
-        kthLevel(root.right, level);
+    // TreeNodes at kth level: Recursive - Time: O(N) Space: O(N+N)
+    public List<Integer> kthLevel(TreeNode root, int level) {
+        return kthLevelHelper(root, level, new ArrayList<>());
     }
 
-    // level order traversal
-    public void levelOrder(Node root) {
+    public List<Integer> kthLevelHelper(TreeNode root, int level, List<Integer> ans) {
+        if (root == null || level < 0)
+            return ans;
+        if (level == 0)
+            ans.add(root.val);
+        level--;
+        kthLevelHelper(root.left, level, ans);
+        kthLevelHelper(root.right, level, ans);
+        return ans;
+    }
+
+    // Level Order Traversal: Iterative - Time: O(N) Space: O(N)
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        if (root == null)
+            return ans;
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> temp = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TreeNode curr = queue.poll();
+                temp.add(curr.val);
+                if (curr.left != null)
+                    queue.add(curr.left);
+                if (curr.right != null)
+                    queue.add(curr.right);
+            }
+            ans.add(temp);
+        }
+        return ans;
+    }
+
+    // Level Order Traversal: Recursive - Time: O(N) Space: O(N)
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
         int h = height(root);
         for (int i = 0; i <= h; i++) {
-            kthLevel(root, i);
+            ans.add(kthLevel(root, i));
         }
+        return ans;
     }
 
-    // reverse level order traversal
-    public void reverseLevelOrder(Node root) {
+    // Reverse Level Order Traversal: Recursive - Time: O(N) Space: O(N)
+    public List<List<Integer>> reverseLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
         int h = height(root);
         for (int i = h; i >= 0; i--) {
-            kthLevel(root, i);
+            ans.add(kthLevel(root, i));
         }
+        return ans;
     }
 
-    // print left view of tree
-    public ArrayList<Integer> leftView(Node root) {
+    // Left view of tree: Iterative - Time: O(N) Space: O(N)
+    public ArrayList<Integer> leftView1(TreeNode root) {
         ArrayList<Integer> ans = new ArrayList<>();
         if (root == null)
             return ans;
 
-        Queue<Node> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
 
         queue.add(root);
         while (!queue.isEmpty()) {
             int n = queue.size();
             for (int i = 0; i < n; i++) {
-                Node temp = queue.poll();
+                TreeNode temp = queue.poll();
                 if (i == 0)
-                    ans.add(temp.data);
+                    ans.add(temp.val);
                 if (temp.left != null)
                     queue.add(temp.left);
                 if (temp.right != null)
@@ -214,9 +335,24 @@ class BinaryTreeDS {
         return ans;
     }
 
-    // right view of tree
-    public ArrayList<Integer> rightView(Node root) {
-        Queue<Node> queue = new LinkedList<>();
+    // Left view of tree: Recursive - Time: O(N) Space: O(N)
+    public List<Integer> leftView2(TreeNode root) {
+        return leftViewHelper(root, 0, new ArrayList<>());
+    }
+
+    private List<Integer> leftViewHelper(TreeNode root, int currDepth, ArrayList<Integer> ans) {
+        if (root == null)
+            return ans;
+        if (ans.size() == currDepth)
+            ans.add(root.val);
+        leftViewHelper(root.left, currDepth + 1, ans);
+        leftViewHelper(root.right, currDepth + 1, ans);
+        return ans;
+    }
+
+    // Right view of tree: Iterative - Time: O(N) Space: O(N)
+    public List<Integer> rightView1(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
         ArrayList<Integer> ans = new ArrayList<>();
 
         if (root == null)
@@ -226,15 +362,30 @@ class BinaryTreeDS {
         while (!queue.isEmpty()) {
             int n = queue.size();
             for (int i = 0; i < n; i++) {
-                Node temp = queue.poll();
+                TreeNode temp = queue.poll();
                 if (i == n - 1)
-                    ans.add(temp.data);
+                    ans.add(temp.val);
                 if (temp.left != null)
                     queue.add(temp.left);
                 if (temp.right != null)
                     queue.add(temp.right);
             }
         }
+        return ans;
+    }
+
+    // Right view of tree: Recursive - Time: O(N) Space: O(N)
+    public List<Integer> rightView2(TreeNode root) {
+        return rightViewHelper(root, 0, new ArrayList<>());
+    }
+
+    private List<Integer> rightViewHelper(TreeNode root, int currDepth, ArrayList<Integer> ans) {
+        if (root == null)
+            return ans;
+        if (ans.size() == currDepth)
+            ans.add(root.val);
+        rightViewHelper(root.right, currDepth + 1, ans);
+        rightViewHelper(root.left, currDepth + 1, ans);
         return ans;
     }
 
@@ -251,21 +402,21 @@ class BinaryTreeDS {
         }
     }
 
-    // top view of tree
-    public ArrayList<Integer> topView(Node root) {
+    // Top view: Iterative - Time: O(N) Space: O(N)
+    public ArrayList<Integer> topView(TreeNode root) {
         ArrayList<Integer> ans = new ArrayList<>();
-        TreeMap<Integer, Integer> map = new TreeMap<>(); // hd, node
-        Queue<Pair<Node, Integer>> queue = new LinkedList<>(); // (node, hd)
+        TreeMap<Integer, Integer> map = new TreeMap<>(); // hd, TreeNode
+        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>(); // (TreeNode, hd)
 
         if (root == null)
             return ans;
         queue.add(new Pair<>(root, 0));
         while (!queue.isEmpty()) {
-            Node temp = queue.peek().first;
+            TreeNode temp = queue.peek().first;
             int h = queue.peek().second;
             queue.poll();
             if (!map.containsKey(h))
-                map.put(h, temp.data);
+                map.put(h, temp.val);
             if (temp.left != null)
                 queue.add(new Pair<>(temp.left, h - 1));
             if (temp.right != null)
@@ -276,20 +427,20 @@ class BinaryTreeDS {
         return ans;
     }
 
-    // bottom view of tree
-    public ArrayList<Integer> bottomView(Node root) {
+    // Bottom view: Iterative - Time: O(N) Space: O(N)
+    public ArrayList<Integer> bottomView(TreeNode root) {
         ArrayList<Integer> ans = new ArrayList<>();
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        Queue<Pair<Node, Integer>> queue = new LinkedList<>();
+        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
 
         if (root == null)
             return ans;
         queue.add(new Pair<>(root, 0));
         while (!queue.isEmpty()) {
-            Node temp = queue.peek().first;
+            TreeNode temp = queue.peek().first;
             int h = queue.peek().second;
             queue.poll();
-            map.put(h, temp.data);
+            map.put(h, temp.val);
             if (temp.left != null)
                 queue.add(new Pair<>(temp.left, h - 1));
             if (temp.right != null)
@@ -300,73 +451,79 @@ class BinaryTreeDS {
         return ans;
     }
 
-    // zig-zag traversal tree
-    public ArrayList<Integer> zigzag(Node root) {
-        ArrayList<Integer> ans = new ArrayList<>();
-        ArrayList<Integer> temp = new ArrayList<>();
+    // Zig-Zag Traversal: Iterative - Time: O(N) Space: O(N)
+    public List<List<Integer>> zigzag(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        List<Integer> temp = new ArrayList<>();
+
+        if (root == null)
+            return ans;
         int h = height(root);
-        for (int i = 0; i <= h; i++) {
-            temp = kthLevelIter(root, i);
+
+        for (int i = 0; i < h; i++) {
+            temp = kthLevel(root, i);
             if (i % 2 == 0)
-                ans.addAll(temp);
+                ans.add(temp);
             else {
                 Collections.reverse(temp);
-                ans.addAll(temp);
+                ans.add(temp);
             }
         }
         return ans;
     }
 
-    // diagonal traversal of tree
-    public ArrayList<Integer> diagonal(Node root) {
+    // Diagonal Traversal: Iterative - Time: O(N) Space: O(N)
+    public ArrayList<Integer> diagonal(TreeNode root) {
         ArrayList<Integer> ans = new ArrayList<>();
-        Queue<Node> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
 
         if (root == null)
             return ans;
 
         queue.add(root);
         while (!queue.isEmpty()) {
-            Node temp = queue.poll();
+            TreeNode temp = queue.poll();
             while (temp != null) {
-                if (temp.left != null)
+                if (temp.left != null) {
                     queue.add(temp.left);
-                ans.add(temp.data);
+                }
+                ans.add(temp.val);
                 temp = temp.right;
             }
         }
         return ans;
     }
 
-    public void leftBoundary(Node root, ArrayList<Integer> ans) {
+    // Diagonal Traversal: Iterative - Time: O(N) Space: O(N)
+    public void leftBoundary(TreeNode root, ArrayList<Integer> ans) {
         if (root == null)
             return;
         if (root.left != null) {
-            ans.add(root.data);
+            ans.add(root.val);
             leftBoundary(root.left, ans);
         } else if (root.right != null) {
-            ans.add(root.data);
+            ans.add(root.val);
             leftBoundary(root.right, ans);
         }
     }
 
-    public void rightBoundary(Node root, ArrayList<Integer> ans) {
+    public void rightBoundary(TreeNode root, ArrayList<Integer> ans) {
         if (root == null)
             return;
         if (root.right != null) {
-            ans.add(root.data);
+            ans.add(root.val);
             rightBoundary(root.right, ans);
         } else if (root.left != null) {
-            ans.add(root.data);
+            ans.add(root.val);
             rightBoundary(root.left, ans);
         }
     }
 
-    public void leaves(Node root, ArrayList<Integer> ans) {
+    public void leaves(TreeNode root, ArrayList<Integer> ans) {
         if (root == null)
             return;
         if (root.left == null && root.right == null)
-            ans.add(root.data);
+            ans.add(root.val);
         else {
             if (root.left != null)
                 leaves(root.left, ans);
@@ -376,12 +533,12 @@ class BinaryTreeDS {
     }
 
     // boundary traversal of tree
-    public ArrayList<Integer> boundary(Node root) {
+    public ArrayList<Integer> boundary(TreeNode root) {
         ArrayList<Integer> ans = new ArrayList<>();
 
         if (root == null)
             return ans;
-        ans.add(root.data);
+        ans.add(root.val);
         leftBoundary(root.left, ans);
         leaves(root, ans);
         rightBoundary(root.right, ans);
@@ -389,7 +546,7 @@ class BinaryTreeDS {
     }
 
     // diameter of tree
-    public int diameter(Node root) {
+    public int diameter(TreeNode root) {
         if (root == null)
             return 0;
         int lheight = height(root.left);
@@ -402,17 +559,17 @@ class BinaryTreeDS {
     }
 
     // mirror of tree
-    public Node mirrorify(Node root) {
+    public TreeNode mirrorify(TreeNode root) {
         if (root == null)
             return null;
-        Node mirror = new Node(root.data);
+        TreeNode mirror = new TreeNode(root.val);
         mirror.right = mirrorify(root.left);
         mirror.left = mirrorify(root.right);
         return mirror;
     }
 
     // check if tree is balanced
-    public boolean isBalanced(Node root) {
+    public boolean isBalanced(TreeNode root) {
         if (root == null)
             return true;
         int lh = height(root.left);
@@ -427,23 +584,23 @@ class BinaryTreeDS {
 public class Tree {
     public static void main(String[] args) {
         BinaryTreeDS tree = new BinaryTreeDS();
-        Node root = new Node(5);
-        root.left = new Node(3);
-        root.right = new Node(10);
-        root.left.left = new Node(1);
-        root.left.right = new Node(4);
-        root.right.left = new Node(8);
-        root.right.right = new Node(13);
-        root.left.left.left = new Node(0);
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(10);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(4);
+        root.right.left = new TreeNode(8);
+        root.right.right = new TreeNode(13);
+        root.left.left.left = new TreeNode(0);
 
         System.out.print("\n\nInorder :- ");
-        tree.inorder(root);
+        System.out.print(tree.inorder2(root).toString());
 
         System.out.print("\n\nPreorder :- ");
-        tree.preorder(root);
+        System.out.print(tree.preorder2(root).toString());
 
         System.out.print("\n\nPostorder :- ");
-        tree.postorder(root);
+        System.out.print(tree.postorder2(root).toString());
 
         System.out.print("\n\nLevel order :- ");
         tree.levelOrder(root);
@@ -451,18 +608,18 @@ public class Tree {
         System.out.print("\n\nReverse Level order :- ");
         tree.reverseLevelOrder(root);
 
-        System.out.println("\n\nSum of all nodes = " + tree.sum(root));
-        System.out.println("\nDifference between even and odd level nodes = " + tree.getDiffEvenOdd(root));
-        System.out.print("\nAll even level nodes = ");
-        tree.even(root, true);
-        System.out.print("\n\nAll odd level nodes = ");
-        tree.odd(root, false);
-        System.out.println("\n\nNo. of nodes = " + tree.countNodes(root));
-        System.out.println("\nNo. of Leaf nodes = " + tree.countLeafNodes(root));
+        System.out.println("\n\nSum of all TreeNodes = " + tree.sum(root));
+        System.out.println("\nDifference between even and odd level TreeNodes = " + tree.getDiffEvenOdd(root));
+        System.out.print("\nAll even level TreeNodes = ");
+        System.out.print(tree.even(root).toString());
+        System.out.print("\n\nAll odd level TreeNodes = ");
+        System.out.print(tree.odd(root).toString());
+        System.out.println("\n\nNo. of TreeNodes = " + tree.countTreeNodes(root));
+        System.out.println("\nNo. of Leaf TreeNodes = " + tree.countLeafTreeNodes(root));
         System.out.println("\nHeight of tree = " + tree.height(root));
-        System.out.print("\nAll kth level nodes = " + tree.kthLevelIter(root, 2));
-        System.out.print("\n\nLeft View = " + tree.leftView(root));
-        System.out.print("\n\nRight View = " + tree.rightView(root));
+        System.out.print("\nAll kth level TreeNodes = " + tree.kthLevelIter(root, 2));
+        System.out.print("\n\nLeft View = " + tree.leftView1(root));
+        System.out.print("\n\nRight View = " + tree.rightView1(root));
         System.out.print("\n\nTop View = " + tree.topView(root));
         System.out.print("\n\nBottom View = " + tree.bottomView(root));
         System.out.print("\n\nZig Zag Traversal = " + tree.zigzag(root));
@@ -470,9 +627,9 @@ public class Tree {
         System.out.print("\n\nBoundary Traversal = " + tree.boundary(root));
         System.out.print("\n\nDiameter = " + tree.diameter(root));
         System.out.print("\n\nInorder of original tree :- ");
-        tree.inorder(root);
+        System.out.print(tree.inorder2(root).toString());
         System.out.print("\n\nInorder of mirror tree :- ");
-        tree.inorder(tree.mirrorify(root));
+        System.out.print(tree.inorder2(tree.mirrorify(root)).toString());
         System.out.println("\n\nBalanced = " + tree.isBalanced(root));
     }
 }
