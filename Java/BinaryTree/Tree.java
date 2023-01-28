@@ -494,7 +494,6 @@ class BinaryTreeDS {
         return ans;
     }
 
-    // Diagonal Traversal: Iterative - Time: O(N) Space: O(N)
     public void leftBoundary(TreeNode root, ArrayList<Integer> ans) {
         if (root == null)
             return;
@@ -532,7 +531,7 @@ class BinaryTreeDS {
         }
     }
 
-    // boundary traversal of tree
+    // Boundary Traversal: Time: O(N) Space: O(N)
     public ArrayList<Integer> boundary(TreeNode root) {
         ArrayList<Integer> ans = new ArrayList<>();
 
@@ -545,7 +544,7 @@ class BinaryTreeDS {
         return ans;
     }
 
-    // diameter of tree
+    // Diameter of tree: Recursive - Time: O(N2) Space: O(N)
     public int diameter(TreeNode root) {
         if (root == null)
             return 0;
@@ -558,7 +557,7 @@ class BinaryTreeDS {
         return Math.max(lheight + rheight + 1, Math.max(ldiameter, rdiameter));
     }
 
-    // mirror of tree
+    // Mirror of tree: Recursive - Time: O(N) Space: O(N)
     public TreeNode mirrorify(TreeNode root) {
         if (root == null)
             return null;
@@ -568,7 +567,7 @@ class BinaryTreeDS {
         return mirror;
     }
 
-    // check if tree is balanced
+    // Check if tree is balanced: Recursive - Time*: O(N) Space: O(N)
     public boolean isBalanced(TreeNode root) {
         if (root == null)
             return true;
@@ -579,6 +578,53 @@ class BinaryTreeDS {
             return true;
         return false;
     }
+
+    // Root to Node path: Recursive - Time: O(N) Space: O(H)
+    public List<Integer> getPathFromRoot(TreeNode root, int x) {
+        List<Integer> ans = new ArrayList<>();
+        getPathFromRootHelper(root, x, ans);
+        return ans;
+    }
+
+    private boolean getPathFromRootHelper(TreeNode root, int x, List<Integer> ans) {
+        if (root == null)
+            return false;
+
+        ans.add(root.val);
+        if (root.val == x)
+            return true;
+        if (getPathFromRootHelper(root.left, x, ans) || getPathFromRootHelper(root.right, x, ans))
+            return true;
+        ans.remove(ans.size() - 1);
+        return false;
+    }
+
+    // Check if two trees are identical: Recursive - Time: O(min(M,N)) Space:
+    // O(min(H1, H2))
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null)
+            return true;
+        if (p == null || q == null)
+            return false;
+        return (p.val == q.val) && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+    // Max-Path Sum: Recursive - Time: O(N) Space: O(N)
+    public int maxPathSum(TreeNode root) {
+        int[] res = new int[1];
+        res[0] = Integer.MIN_VALUE;
+        maxPathSumHelper(root, res);
+        return res[0];
+    }
+
+    private int maxPathSumHelper(TreeNode root, int[] res) {
+        if(root == null) return 0;
+        int leftSum = Math.max(0, maxPathSumHelper(root.left, res));
+        int rightSum = Math.max(0, maxPathSumHelper(root.right, res));
+        res[0] = Math.max(res[0], leftSum + rightSum + root.val);
+        return Math.max(leftSum, rightSum) + root.val;
+    }
+
 }
 
 public class Tree {
