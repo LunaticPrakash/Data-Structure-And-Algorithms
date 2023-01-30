@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -618,13 +619,140 @@ class BinaryTreeDS {
     }
 
     private int maxPathSumHelper(TreeNode root, int[] res) {
-        if(root == null) return 0;
+        if (root == null)
+            return 0;
         int leftSum = Math.max(0, maxPathSumHelper(root.left, res));
         int rightSum = Math.max(0, maxPathSumHelper(root.right, res));
         res[0] = Math.max(res[0], leftSum + rightSum + root.val);
         return Math.max(leftSum, rightSum) + root.val;
     }
 
+    // Max-Width of Tree: Iterative - Time: O(N) Space: O(N)
+    public int widthOfBinaryTree1(TreeNode root) {
+        if (root == null)
+            return 0;
+        int maxWidth = 0;
+        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
+        queue.offer(new Pair<TreeNode, Integer>(root, 0));
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            int startIndex = 0, lastIndex = 0;
+            for (int i = 0; i < n; i++) {
+                TreeNode curr = queue.peek().first;
+                int currIndex = queue.peek().second;
+                queue.poll();
+                if (i == 0)
+                    startIndex = currIndex;
+                if (i == n - 1)
+                    lastIndex = currIndex;
+                if (curr.left != null)
+                    queue.offer(new Pair<TreeNode, Integer>(curr.left, 2 * currIndex + 1));
+                if (curr.right != null)
+                    queue.offer(new Pair<TreeNode, Integer>(curr.right, 2 * currIndex + 2));
+            }
+            maxWidth = Math.max(maxWidth, lastIndex - startIndex + 1);
+        }
+        return maxWidth;
+    }
+
+    // Max-Width of Tree: Iterative - Time: O(N) Space: O(N)
+    public int widthOfBinaryTree2(TreeNode root) {
+        if (root == null)
+            return 0;
+        int maxWidth = 0;
+        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
+        queue.offer(new Pair<TreeNode, Integer>(root, 0));
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            int minIndex = queue.peek().second;
+            int startIndex = 0, lastIndex = 0;
+            for (int i = 0; i < n; i++) {
+                TreeNode curr = queue.peek().first;
+                int currIndex = queue.peek().second - minIndex;
+                queue.poll();
+                if (i == 0)
+                    startIndex = currIndex;
+                if (i == n - 1)
+                    lastIndex = currIndex;
+                if (curr.left != null)
+                    queue.offer(new Pair<TreeNode, Integer>(curr.left, 2 * currIndex + 1));
+                if (curr.right != null)
+                    queue.offer(new Pair<TreeNode, Integer>(curr.right, 2 * currIndex + 2));
+            }
+            maxWidth = Math.max(maxWidth, lastIndex - startIndex + 1);
+        }
+        return maxWidth;
+    }
+
+    // Build Tree from Inorder & Preorder: Recursive - Time: O(N) Space: O(N)
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        HashMap<Integer, Integer> inMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            inMap.put(inorder[i], i);
+        }
+        return buildTreeHelper(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1, inMap);
+    }
+
+    private TreeNode buildTreeHelper(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd,
+            HashMap<Integer, Integer> inMap) {
+        if (preStart > preEnd || inStart > inEnd)
+            return null;
+        TreeNode root = new TreeNode(preorder[preStart]);
+        int inRoot = inMap.get(root.val);
+        int numsLeft = inRoot - inStart;
+
+        root.left = buildTreeHelper(preorder, preStart + 1, preStart + numsLeft, inorder, inStart, inRoot - 1, inMap);
+        root.right = buildTreeHelper(preorder, preStart + numsLeft + 1, preEnd + numsLeft, inorder, inRoot + 1, inEnd,
+                inMap);
+        return root;
+    }
+
+    // LCA: Recursive - Time: O(N) Space: O(N)
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q)
+            return root;
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+        if (left == null)
+            return right;
+        if (right == null)
+            return left;
+        else {
+            return root;
+        }
+    }
+
+    // LCA: Recursive - Time: O(N) Space: O(N)
+    public boolean isSymmetric(TreeNode root) {
+        return isSymmetricHelper(root.left, root.right);
+    }
+
+    private boolean isSymmetricHelper(TreeNode root1, TreeNode root2) {
+        if (root1 == null || root2 == null)
+            return root1 == root2;
+        if (root1.val != root2.val)
+            return false;
+        return isSymmetricHelper(root1.left, root2.right) && isSymmetricHelper(root1.right, root2.left);
+    }
+
+    // Flatten Binary Tree to Linked List: Recursive - Time: O(N) Space: O(N)
+    public void flatten(TreeNode root) {
+        if (root != null) {
+            List<Integer> preOrder = preorder1(root, new ArrayList<>());
+            TreeNode newRoot = new TreeNode(preOrder.get(0));
+            TreeNode temp = newRoot;
+            for (int i = 1; i < preOrder.size(); i++) {
+                temp.right = new TreeNode(preOrder.get(i));
+                temp = temp.right;
+            }
+            root.left = null;
+            root.right = newRoot.right;
+        }
+    }
 }
 
 public class Tree {
@@ -677,5 +805,6 @@ public class Tree {
         System.out.print("\n\nInorder of mirror tree :- ");
         System.out.print(tree.inorder2(tree.mirrorify(root)).toString());
         System.out.println("\n\nBalanced = " + tree.isBalanced(root));
+        System.out.println("\n\nMax Width = " + tree.widthOfBinaryTree1(root));
     }
 }
