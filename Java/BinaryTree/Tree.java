@@ -726,7 +726,7 @@ class BinaryTreeDS {
         }
     }
 
-    // LCA: Recursive - Time: O(N) Space: O(N)
+    // Check if tree is symmetric: Recursive - Time: O(N) Space: O(N)
     public boolean isSymmetric(TreeNode root) {
         return isSymmetricHelper(root.left, root.right);
     }
@@ -752,6 +752,17 @@ class BinaryTreeDS {
             root.left = null;
             root.right = newRoot.right;
         }
+    }
+
+    // Check Children Sum Property: Recursive - Time: O(N) Space: O(N)
+    public boolean checkChildrenSum(TreeNode root) {
+        if (root == null)
+            return true;
+        if (root.left != null && root.right != null)
+            return true;
+        int leftVal = root.left == null ? 0 : root.left.val;
+        int rightVal = root.right == null ? 0 : root.right.val;
+        return (root.val == leftVal + rightVal) && checkChildrenSum(root.left) && checkChildrenSum(root.right);
     }
 }
 
