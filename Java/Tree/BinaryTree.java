@@ -20,7 +20,7 @@ class TreeNode {
     }
 }
 
-class BinaryTreeDS {
+public class BinaryTree {
 
     // Insert a TreeNode: Iterative - Time: O(N) Space: O(N)
     public TreeNode insert(TreeNode root, int val) {
@@ -764,11 +764,9 @@ class BinaryTreeDS {
         int rightVal = root.right == null ? 0 : root.right.val;
         return (root.val == leftVal + rightVal) && checkChildrenSum(root.left) && checkChildrenSum(root.right);
     }
-}
 
-public class Tree {
     public static void main(String[] args) {
-        BinaryTreeDS tree = new BinaryTreeDS();
+        BinaryTree tree = new BinaryTree();
         TreeNode root = new TreeNode(5);
         root.left = new TreeNode(3);
         root.right = new TreeNode(10);
@@ -818,4 +816,5 @@ public class Tree {
         System.out.println("\n\nBalanced = " + tree.isBalanced(root));
         System.out.println("\n\nMax Width = " + tree.widthOfBinaryTree1(root));
     }
+
 }
