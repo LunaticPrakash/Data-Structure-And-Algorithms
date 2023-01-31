@@ -107,6 +107,31 @@ public class BinarySearchTree {
         return root;
     }
 
+    // Check if BT is BST: Recursive - Time: O(N) Space: O(N)
+    public boolean isValidBST(TreeNode root) {
+        return isValidBSTHelper(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean isValidBSTHelper(TreeNode root, long minValue, long maxValue) {
+        if(root == null) return true;
+        if(root.val >= maxValue || root.val <= minValue )
+            return false;
+        return isValidBSTHelper(root.left, minValue, root.val) && isValidBSTHelper(root.right, root.val, maxValue);
+    }
+
+    // LCA: Recursive - Time: O(N) Space: O(N)
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q)
+            return root;
+        int curr = root.val;
+
+        if(curr > p.val && curr > q.val)
+            return lowestCommonAncestor(root.left, p, q);
+        if(curr < p.val && curr < q.val)
+            return lowestCommonAncestor(root.right, p, q);
+        return root;
+    }
+
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
         TreeNode root = new TreeNode(1);
