@@ -765,6 +765,29 @@ public class BinaryTree {
         return (root.val == leftVal + rightVal) && checkChildrenSum(root.left) && checkChildrenSum(root.right);
     }
 
+    public TreeNode connect(TreeNode root) {
+        if(root == null) return root;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<TreeNode> temp = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TreeNode curr = queue.poll();
+                temp.add(curr);
+                if (curr.left != null)
+                    queue.add(curr.left);
+                if (curr.right != null)
+                    queue.add(curr.right);
+                for(int j=0; j<temp.size()-1; j++){
+                    // temp.get(j).next = temp.get(j+1);   uncomment this line to run
+                }
+            }
+        }
+        return root;
+    }
+
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
         TreeNode root = new TreeNode(5);
