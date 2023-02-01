@@ -102,7 +102,7 @@ public class BinarySearchTree {
         while (i <= end && preorder[i] < rootVal) {
             i++;
         }
-        root.left = bstFromPreorderHelper(preorder, start+1, i-1);
+        root.left = bstFromPreorderHelper(preorder, start + 1, i - 1);
         root.right = bstFromPreorderHelper(preorder, i, end);
         return root;
     }
@@ -113,8 +113,9 @@ public class BinarySearchTree {
     }
 
     private boolean isValidBSTHelper(TreeNode root, long minValue, long maxValue) {
-        if(root == null) return true;
-        if(root.val >= maxValue || root.val <= minValue )
+        if (root == null)
+            return true;
+        if (root.val >= maxValue || root.val <= minValue)
             return false;
         return isValidBSTHelper(root.left, minValue, root.val) && isValidBSTHelper(root.right, root.val, maxValue);
     }
@@ -125,11 +126,47 @@ public class BinarySearchTree {
             return root;
         int curr = root.val;
 
-        if(curr > p.val && curr > q.val)
+        if (curr > p.val && curr > q.val)
             return lowestCommonAncestor(root.left, p, q);
-        if(curr < p.val && curr < q.val)
+        if (curr < p.val && curr < q.val)
             return lowestCommonAncestor(root.right, p, q);
         return root;
+    }
+
+    // Floor in BST: Interative - Time:O(H) Space:O(1)
+    public int floorInBST(TreeNode root, int X) {
+        int floor = -1;
+        while (root != null) {
+            if (root.val == X) {
+                floor = X;
+                return floor;
+            }
+            if (X > root.val) {
+                floor = root.val;
+                root = root.right;
+            } else {
+                root = root.left;
+            }
+        }
+        return floor;
+    }
+
+    // Floor in BST: Interative - Time:O(H) Space:O(1)
+    public  static int findCeil(TreeNode root, int X) {
+        int ceil = -1;
+        while (root != null) {
+            if (root.val == X) {
+                ceil = X;
+                return ceil;
+            }
+            if (X < root.val) {
+                ceil = root.val;
+                root = root.left;
+            } else {
+                root = root.right;
+            }
+        }
+        return ceil;
     }
 
     public static void main(String[] args) {
