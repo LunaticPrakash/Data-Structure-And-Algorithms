@@ -279,52 +279,6 @@ public class BinarySearchTree {
             }
         }
     }
-
-    // Encodes a tree to a single string: Iterative - Time: O(N) Space: O(N)
-    public String serialize(TreeNode root) {
-        if(root == null) return "";
-        StringBuilder res = new StringBuilder();
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while(!queue.isEmpty()){
-            TreeNode curr = queue.poll();
-            if(curr == null){
-                res.append("#");
-            }
-            else{
-                res.append(curr.val);
-                queue.offer(curr.left);
-                queue.offer(curr.right);
-            }
-            res.append(",");
-        }
-        return res.toString();
-    }
-
-    // Decodes your encoded data to tree: Iterative - Time: O(N) Space: O(N)
-    public TreeNode deserialize(String data) {
-        if(data.equals("")) return null;
-        Queue<TreeNode> queue = new LinkedList<>();
-        String[] nodes = data.split(",");
-        TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
-        queue.offer(root);
-
-        for(int i=1; i<nodes.length; i++){
-            TreeNode curr = queue.poll();
-            if(!nodes[i].equals("#")){
-                TreeNode left = new TreeNode(Integer.parseInt(nodes[i]));
-                curr.left = left;
-                queue.offer(left);
-            }
-            if(!nodes[++i].equals("#")){
-                TreeNode right = new TreeNode(Integer.parseInt(nodes[i]));
-                curr.right = right;
-                queue.offer(right);
-            }
-        }
-        return root;
-    }
     
 
     public static void main(String[] args) {
