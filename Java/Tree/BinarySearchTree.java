@@ -151,8 +151,8 @@ public class BinarySearchTree {
         return floor;
     }
 
-    // Floor in BST: Interative - Time:O(H) Space:O(1)
-    public  static int findCeil(TreeNode root, int X) {
+    // Ceil in BST: Interative - Time:O(H) Space:O(1)
+    public static int findCeil(TreeNode root, int X) {
         int ceil = -1;
         while (root != null) {
             if (root.val == X) {
@@ -167,6 +167,59 @@ public class BinarySearchTree {
             }
         }
         return ceil;
+    }
+
+    // kth Smallest element in BST: Recursive - Time:O(N) Space:O(N)
+    public int kthSmallest1(TreeNode root, int k) {
+        List<Integer> in = inorder(root, new ArrayList<>());
+        return in.get(k - 1);
+    }
+
+    // kth Smallest element in BST: Recursive - Time:O(N) Space:O(N)
+    public int kthSmallest2(TreeNode root, int k) {
+        int[] count = new int[1];
+        int[] ans = new int[1];
+        kthSmallest2Helper(root, k, count, ans);
+        return ans[0];
+    }
+
+    private void kthSmallest2Helper(TreeNode root, int k, int[] count, int[] ans) {
+        if (root == null)
+            return;
+        kthSmallest2Helper(root.left, k, count, ans);
+        count[0] += 1;
+        if (count[0] == k) {
+            ans[0] = root.val;
+            return;
+        }
+        kthSmallest2Helper(root.right, k, count, ans);
+    }
+
+    // kth Largest element in BST: Recursive - Time:O(N+N) Space:O(N)
+    public int kthLargest(TreeNode root, int k) {
+        int[] count = new int[1];
+        int[] ans = new int[1];
+        int nElem = countTreeNodes(root);
+        kthLargestHelper(root, k, nElem, count, ans);
+        return ans[0];
+    }
+
+    private void kthLargestHelper(TreeNode root, int k, int nElem, int[] count, int[] ans) {
+        if (root == null)
+            return;
+        kthLargestHelper(root.left, k, nElem, count, ans);
+        count[0] += 1;
+        if (count[0] == nElem - k) {
+            ans[0] = root.val;
+            return;
+        }
+        kthLargestHelper(root.right, k, nElem, count, ans);
+    }
+
+    public int countTreeNodes(TreeNode root) {
+        if (root == null)
+            return 0;
+        return 1 + countTreeNodes(root.left) + countTreeNodes(root.right);
     }
 
     public static void main(String[] args) {
