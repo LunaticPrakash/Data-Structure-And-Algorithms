@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 class TreeNode {
     int val;
@@ -216,11 +217,69 @@ public class BinarySearchTree {
         kthLargestHelper(root.right, k, nElem, count, ans);
     }
 
+    // Number of TreeNodes in tree: Recursive - Time: O(N) Space: O(N)
     public int countTreeNodes(TreeNode root) {
         if (root == null)
             return 0;
         return 1 + countTreeNodes(root.left) + countTreeNodes(root.right);
     }
+
+    // BST Iterator: Iterative - Time: O(1){for next() & hasNext()} Space: O(N)
+    class BSTIterator1 {
+
+        private List<Integer> in = new ArrayList<>();
+        private int count;
+    
+        public List<Integer> inorder(TreeNode root, List<Integer> ans) {
+            if (root == null)
+                return ans;
+            inorder(root.left, ans);
+            ans.add(root.val);
+            inorder(root.right, ans);
+            return ans;
+        }
+    
+        public BSTIterator1(TreeNode root) {
+            this.in = inorder(root, new ArrayList<>());
+            this.count = 0;
+        }
+        
+        public int next() {
+            return this.in.get(count++);
+        }
+        
+        public boolean hasNext() {
+            return this.in.size() > count;
+        }
+    }
+
+    // BST Iterator: Iterative - Time: O(1){for next() & hasNext()} Space: O(H)
+    class BSTIterator2 {
+
+        private Stack<TreeNode> stack = new Stack<>();
+    
+        public BSTIterator2(TreeNode root) {
+            pushAllLeftNodes(root);
+        }
+        
+        public int next() {
+            TreeNode temp = stack.pop();
+            pushAllLeftNodes(temp.right);
+            return temp.val;
+        }
+        
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+    
+        public void pushAllLeftNodes(TreeNode node){
+            while(node != null){
+                stack.push(node);
+                node = node.left;
+            }
+        }
+    }
+    
 
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
