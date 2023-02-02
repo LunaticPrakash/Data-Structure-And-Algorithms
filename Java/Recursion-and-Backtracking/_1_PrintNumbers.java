@@ -25,25 +25,26 @@ public class _1_PrintNumbers {
         printNumRecusrion2(n - 1);
     }
 
-     // Print numbers from n to 1: Backtracking - Time: O(N) Space: O(N){for
+    // Print numbers from n to 1: Backtracking - Time: O(N) Space: O(N){for
     // Recursion}
     public static void printNumBacktrack2(int i, int n) {
-        if(i > n)
+        if (i > n)
             return;
-        printNumBacktrack2(i+1, n);
+        printNumBacktrack2(i + 1, n);
         System.out.print(i + " ");
     }
 
     public static void main(String[] args) {
         int n = 4;
-        System.out.print("Using Recursion: ");
+
+        System.out.print("Print 1 to N (Using Recursion): ");
         printNumRecusrion1(1, n);
-        System.out.print("\nUsing Backtracking: ");
+        System.out.print("\nPrint 1 to N (Using Backtracking): ");
         printNumBacktrack1(n);
 
-        System.out.print("\nUsing Recursion: ");
+        System.out.print("\nPrint N to 1 (Using Recursion): ");
         printNumRecusrion2(n);
-        System.out.print("\nUsing Recursion: ");
+        System.out.print("\nPrint N to 1 (Using Recursion): ");
         printNumBacktrack2(1, n);
     }
 }
