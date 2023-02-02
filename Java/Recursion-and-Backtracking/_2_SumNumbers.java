@@ -1,5 +1,5 @@
 public class _2_SumNumbers {
-    // Sum from 1 to N: Parameterized Recusrion - Time:O(N) Space: O(N){for
+    // Sum from 1 to N: Parameterized Recursion - Time:O(N) Space: O(N){for
     // Recursion}
     public static int sumNumbers1(int sum, int n) {
         if (n == 0)
@@ -7,7 +7,7 @@ public class _2_SumNumbers {
         return sumNumbers1(sum + n, n - 1);
     }
 
-    // Sum from 1 to N: Non-Parameterized Recusrion - Time:O(N) Space:
+    // Sum from 1 to N: Non-Parameterized Recursion - Time:O(N) Space:
     // O(N){for Recursion}
     public static int sumNumbers2(int n) {
         if (n == 0 || n == 1)
