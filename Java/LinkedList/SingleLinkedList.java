@@ -9,6 +9,23 @@ class Node {
         this.data = data;
         this.next = null;
     }
+
+    public Node() {
+    }
+}
+
+class ListNode {
+    public int data;
+    public ListNode next;
+    public ListNode bottom;
+
+    public ListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+
+    public ListNode() {
+    }
 }
 
 class LinkedList {
@@ -618,33 +635,22 @@ class LinkedList {
     }
 
     public Node delNthNodeEnd2(Node head, int n) {
-        Node p1 = head;
-        Node p2 = head;
-        int count = 0;
-        while (p1 != null && count < n + 1) {
-            p1 = p1.next;
-            count++;
+        Node start = new Node();
+        start.next = head;
+        Node slow = start;
+        Node fast = start;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
         }
 
-        if (p1 == null && count == n) {
-            head = head.next;
-            return head;
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
         }
 
-        if (p1 == null && count != n)
-            return head;
-
-        while (p1 != null) {
-            p1 = p1.next;
-            p2 = p2.next;
-        }
-
-        if (p2 != null && p2.next != null) {
-            Node delNode = p2.next;
-            if (delNode != null)
-                p2.next = delNode.next;
-        }
-        return head;
+        slow.next = slow.next.next;
+        return start.next;
     }
 
     public Node removeAllOccuDupl(Node head) {
@@ -662,6 +668,40 @@ class LinkedList {
         }
         head = pre.next;
         return head;
+    }
+
+    public ListNode flatten(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        head.next = flatten(head.next);
+        head = mergeTwoSortedList(head, head.next);
+        return head;
+    }
+
+    private ListNode mergeTwoSortedList(ListNode l1, ListNode l2) {
+        if (l1 == null)
+            return l2;
+        else if (l2 == null)
+            return l1;
+        ListNode res = new ListNode();
+        ListNode temp = res;
+        while (l1 != null && l2 != null) {
+            if (l1.data <= l2.data) {
+                temp.bottom = l1;
+                temp = temp.bottom;
+                l1 = l1.bottom;
+            } else {
+                temp.bottom = l2;
+                temp = temp.bottom;
+                l2 = l2.bottom;
+            }
+        }
+        if (l1 != null) {
+            temp.bottom = l1;
+        } else {
+            temp.bottom = l2;
+        }
+        return res.bottom;
     }
 
     public void display(Node head) {
