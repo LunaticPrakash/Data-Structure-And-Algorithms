@@ -1,4 +1,6 @@
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 
 class Node {
@@ -25,6 +27,20 @@ class ListNode {
     }
 
     public ListNode() {
+    }
+}
+
+class RNode {
+    public int data;
+    public RNode next;
+    public RNode random;
+
+    public RNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+
+    public RNode() {
     }
 }
 
@@ -286,9 +302,12 @@ class LinkedList {
     }
 
     public Node reverseGroup(Node head, int k) {
-        if (head == null) // head.next == null for 1 element to reverse it fails
-            return head;
-
+        Node temp = head;
+        for (int i = 0; i < k; i++) {
+            if (temp == null)
+                return head;
+            temp = temp.next;
+        }
         Node pre = null, curr = head, nex = null;
         int count = 0;
         while (count < k && curr != null) {
@@ -603,6 +622,21 @@ class LinkedList {
         return true;
     }
 
+    public boolean isPalindrome2(Node head) {
+        return isPalindrome2Helper(head, head);
+    }
+
+    public boolean isPalindrome2Helper(Node start, Node end) {
+        if (end == null)
+            return true;
+        boolean res1 = isPalindrome2Helper(start, end.next);
+        if (res1 == false)
+            return false;
+        boolean res2 = start.data == end.data;
+        start = start.next;
+        return res2;
+    }
+
     int count = 0;
 
     public void nthNodeEnd(Node head, int n) {
@@ -702,6 +736,112 @@ class LinkedList {
             temp.bottom = l2;
         }
         return res.bottom;
+    }
+
+    // Rotate LinkedList in right side By K
+    public ListNode rotateRight(ListNode head, int k) {
+        for (int i = 0; i < k; i++) {
+            head = rotateRightByOne(head);
+        }
+        return head;
+    }
+
+    public ListNode rotateRightByOne(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode t2 = head;
+        while (t2.next.next != null) {
+            t2 = t2.next;
+        }
+        ListNode lastNode = t2.next;
+        lastNode.next = head;
+        t2.next = null;
+        return lastNode;
+    }
+
+    public ListNode rotateRight2(ListNode head, int k) {
+        if (head == null || head.next == null || k == 0)
+            return head;
+
+        ListNode temp = head;
+        int len = 1;
+        while (temp.next != null) {
+            len++;
+            temp = temp.next;
+        }
+        temp.next = head;
+
+        k = k % len;
+        k = len - k;
+
+        for (int i = 0; i < k; i++) {
+            temp = temp.next;
+        }
+        head = temp.next;
+        temp.next = null;
+        return head;
+    }
+
+    public RNode copyRandomList(RNode head) {
+        if (head == null)
+            return null;
+        Map<RNode, RNode> map = new HashMap<>();
+        RNode temp = head;
+        RNode newHead = new RNode(temp.data);
+
+        map.put(temp, newHead);
+
+        temp = temp.next;
+        while (temp != null) {
+            newHead.next = new RNode(temp.data);
+            newHead = newHead.next;
+            map.put(temp, newHead);
+            temp = temp.next;
+        }
+
+        temp = head;
+        while (temp != null) {
+            map.get(temp).random = map.get(temp.random);
+            temp = temp.next;
+        }
+        return map.get(head);
+    }
+
+    public RNode copyRandomList2(RNode head) {
+        RNode iter = head, front = head;
+        while (iter != null) {
+            front = iter.next;
+
+            RNode copy = new RNode(iter.data);
+
+            iter.next = copy;
+            copy.next = front;
+
+            iter = front;
+        }
+
+        iter = head;
+        while (iter != null) {
+            if (iter.random != null) {
+                iter.next.random = iter.random.next;
+            }
+            iter = iter.next.next;
+        }
+
+        iter = head;
+        RNode pseudoHead = new RNode(0);
+        RNode temp = pseudoHead;
+
+        while (iter != null) {
+            front = iter.next.next;
+
+            temp.next = iter.next;
+            temp = temp.next;
+
+            iter.next = front;
+            iter = front;
+        }
+        return pseudoHead.next;
     }
 
     public void display(Node head) {
